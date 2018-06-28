@@ -8,7 +8,6 @@ from flask import jsonify
 from peerplays import PeerPlays
 from peerplaysbase import operations
 from peerplays.amount import Amount
-# import bookie
 
 app = Flask(__name__)
 market_maker_url = ""
