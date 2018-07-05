@@ -1,0 +1,14 @@
+version: '2'
+services:
+
+ qaapi:
+  image: pbsa/qaapi:1.0
+  environment:
+   - 'DEFAULT_ACCOUNT=1.2.18'
+  ports:
+   - "0.0.0.0:5050:5050"
+  volumes:
+  - "qaapi:/var/lib/qaapi"
+
+volumes:
+ qaapi:

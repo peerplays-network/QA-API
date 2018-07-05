@@ -1,0 +1,620 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>qaapi module &#8212; QA-API  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-qaapi">
+<span id="qaapi-module"></span><h1>qaapi module<a class="headerlink" href="#module-qaapi" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="qaapi.cancelBets">
+<code class="descclassname">qaapi.</code><code class="descname">cancelBets</code><span class="sig-paren">(</span><em>bet_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBets" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DELETE</strong> <code class="docutils literal notranslate"><span class="pre">/bets/&lt;bet_id&gt;</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>query-params:</dt>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt>account:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name or account id</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-05T04:15:16&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">68</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;bet_to_cancel&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.533&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.18&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">22274</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">3672811153</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;201e63f37f76aa86639bb6a2f74affddef453371d065ee2748a050962d191cf19054acb1c6f0646a9e646ae12e2ac569d816208619447c5b86b385d041e1aab06c&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getBettingMarketGroups">
+<code class="descclassname">qaapi.</code><code class="descname">getBettingMarketGroups</code><span class="sig-paren">(</span><em>event_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getBettingMarketGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getBettingMarketGroups" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/events/&lt;event_id&gt;/bettingMarketGroups</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;delay_before_settling&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;display_name&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Match Odds&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Match Odds&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;sen&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Match Odds&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.286&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1495&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;never_in_play&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;rules_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;settling_time&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;upcoming&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;total_matched_bets_amount&quot;</span><span class="p">:</span> <span class="mi">3993000</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;delay_before_settling&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;display_name&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Over/Under 0.5 Goals&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Over/Under 0.5 Goals&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;sen&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;O/U 0.5&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.286&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1496&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;never_in_play&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;rules_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.4&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;settling_time&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;upcoming&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;total_matched_bets_amount&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getBettingMarkets">
+<code class="descclassname">qaapi.</code><code class="descname">getBettingMarkets</code><span class="sig-paren">(</span><em>bmg_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getBettingMarkets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getBettingMarkets" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarketGroups/&lt;bmg_id&gt;/bettingMarkets</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Uruguay&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1495&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3119&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;payout_condition&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;unresolved&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;France&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1495&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3120&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;payout_condition&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;unresolved&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;The Draw&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1495&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3121&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;payout_condition&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;resolution&quot;</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;unresolved&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getEventGroups">
+<code class="descclassname">qaapi.</code><code class="descname">getEventGroups</code><span class="sig-paren">(</span><em>sport_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getEventGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getEventGroups" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/sports/&lt;sport_id&gt;/eventGroups</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;UEFA Europa League&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;identifier&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;UEFA Europa League&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;sen&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Europa League&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.0&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.5&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;FA Cup&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;identifier&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;FA Cup&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;sen&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;FA Cup&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.0&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getEvents">
+<code class="descclassname">qaapi.</code><code class="descname">getEvents</code><span class="sig-paren">(</span><em>event_group_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getEvents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/eventGroups/&lt;event_group_id&gt;/events</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.8&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.286&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Uruguay v France&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;season&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2018&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-06T14:00:00&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;upcoming&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.8&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.288&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Russia v Croatia&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;season&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;2018&quot;</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-07T18:00:00&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;upcoming&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getRules">
+<code class="descclassname">qaapi.</code><code class="descname">getRules</code><span class="sig-paren">(</span><em>rules_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getRules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getRules" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/rules/&lt;rules_id&gt;</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span>{
+    &quot;description&quot;: [
+        [
+            &quot;en&quot;,
+            &quot;MARKET INFORMATION How many goals in total will be scored in this match - more or less than the stated number? All bets apply to Full Time result according to the match officials, plus any stoppage time. Extra-time/penalty shoot-outs are not included. At the start of play any unmatched bets will be automatically cancelled and the market will turn in-play. Please note that this market will not be actively managed therefore it is the responsibility of all users to manage their in-play positions. Please also be aware that transmissions described as “live” may actually involve a certain time delay which can vary from case to case. Commission and Transaction Fees apply to all bets placed in this market. For further information please see Bookie Rules.&quot;
+        ],
+        [
+            &quot;grading&quot;,
+            &quot;{&quot;metric&quot;: &quot;{result.hometeam} + {result.awayteam}&quot;, &quot;resolutions&quot;: [{&quot;not_win&quot;: &quot;{metric} &gt; 5.5&quot;, &quot;void&quot;: &quot;False&quot;, &quot;win&quot;: &quot;{metric} &lt; 5.5&quot;}, {&quot;not_win&quot;: &quot;{metric} &lt; 5.5&quot;, &quot;void&quot;: &quot;False&quot;, &quot;win&quot;: &quot;{metric} &gt; 5.5&quot;}]}&quot;
+        ]
+    ],
+    &quot;id&quot;: &quot;1.19.0&quot;,
+    &quot;name&quot;: [
+        [
+            &quot;en&quot;,
+            &quot;R_Soccer_OU_5.5_1&quot;
+        ],
+        [
+            &quot;identifier&quot;,
+            &quot;R_Soccer_OU_5.5_1&quot;
+        ]
+    ]
+}
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getSports">
+<code class="descclassname">qaapi.</code><code class="descname">getSports</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getSports"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getSports" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/sports</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Soccer&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;identifier&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Soccer&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;sen&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Soccer&quot;</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Baseball&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;identifier&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Baseball&quot;</span>
+            <span class="p">],</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;sen&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Baseball&quot;</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+<span class="p">]</span>       
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.getUnmatchedBets">
+<code class="descclassname">qaapi.</code><code class="descname">getUnmatchedBets</code><span class="sig-paren">(</span><em>bettor_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getUnmatchedBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getUnmatchedBets" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/bettors/&lt;bettor_id&gt;/unmatchedBets</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>path-params:</dt>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt>bettor_id:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;amount_to_bet&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">10000000</span><span class="p">,</span>
+            <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;back_or_lay&quot;</span><span class="p">:</span> <span class="s2">&quot;back&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;backer_multiplier&quot;</span><span class="p">:</span> <span class="mi">17000</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3134&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.18&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.537&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;amount_to_bet&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">10000000</span><span class="p">,</span>
+            <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;back_or_lay&quot;</span><span class="p">:</span> <span class="s2">&quot;back&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;backer_multiplier&quot;</span><span class="p">:</span> <span class="mi">17000</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3134&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.18&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.538&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>       
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.placeBets">
+<code class="descclassname">qaapi.</code><code class="descname">placeBets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#placeBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.placeBets" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/placeBets</span></code></p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>query-params:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>account:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name or account id</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span>
+        <span class="nt">&quot;asset_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;BTF&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;bet_amount&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3119&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;odds&quot;</span><span class="p">:</span> <span class="mf">1.44</span><span class="p">,</span>
+        <span class="nt">&quot;back_or_lay&quot;</span><span class="p">:</span> <span class="s2">&quot;back&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span>       <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-04T05:07:11&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">[</span>
+              <span class="mi">62</span><span class="p">,</span>
+              <span class="p">{</span>
+                  <span class="nt">&quot;amount_to_bet&quot;</span><span class="p">:</span> <span class="p">{</span>
+                      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">100000000</span><span class="p">,</span>
+                      <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+                  <span class="p">},</span>
+                  <span class="nt">&quot;back_or_lay&quot;</span><span class="p">:</span> <span class="s2">&quot;back&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;backer_multiplier&quot;</span><span class="p">:</span> <span class="mi">14400</span><span class="p">,</span>
+                  <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3119&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.18&quot;</span><span class="p">,</span>
+                  <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                  <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                      <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span>
+                      <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+                  <span class="p">}</span>
+              <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">60890</span><span class="p">,</span>
+        <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">3193047218</span><span class="p">,</span>
+        <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;200e759209844e2370cddc60e42d880c2ed62f446f3799c6ab32ad95d3e69038b2786482393ead92a94aa9367176449b274305197502c8baf71efa308ab28c57a8&quot;</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/qaapi.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, PBSA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="_sources/qaapi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
