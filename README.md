@@ -5,3 +5,5 @@ Edit config.yaml with the URL to your bookieapi instance
 
 To run, ensure the bookieapi is running, and run with:
 python3 qaapi.py
+
+Documentation is stored in docs/build/html/qaapi.html

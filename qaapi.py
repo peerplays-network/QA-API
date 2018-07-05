@@ -218,7 +218,7 @@ def getSports():
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
-@app.route("/sports/<sport_id>/eventGroups")
+@app.route("/sports/<sport_id>/eventGroups", methods=['GET'])
 def getEventGroups(sport_id):
 	"""
 	**GET** ``/sports/<sport_id>/eventGroups``
@@ -270,7 +270,7 @@ def getEventGroups(sport_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
-@app.route("/eventGroups/<event_group_id>/events")
+@app.route("/eventGroups/<event_group_id>/events", methods=['GET'])
 def getEvents(event_group_id):
 	"""
 	**GET** ``/eventGroups/<event_group_id>/events``
@@ -324,7 +324,7 @@ def getEvents(event_group_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
-@app.route("/events/<event_id>/bettingMarketGroups")
+@app.route("/events/<event_id>/bettingMarketGroups", methods=['GET'])
 def getBettingMarketGroups(event_id):
 	"""
 	**GET** ``/events/<event_id>/bettingMarketGroups``
@@ -390,7 +390,7 @@ def getBettingMarketGroups(event_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
-@app.route("/bettingMarketGroups/<bmg_id>/bettingMarkets")
+@app.route("/bettingMarketGroups/<bmg_id>/bettingMarkets", methods=['GET'])
 def getBettingMarkets(bmg_id):
 	"""
 	**GET** ``/bettingMarketGroups/<bmg_id>/bettingMarkets``
@@ -445,7 +445,7 @@ def getBettingMarkets(bmg_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
-@app.route("/rules/<rules_id>")
+@app.route("/rules/<rules_id>", methods=['GET'])
 def getRules(rules_id):
 	"""
 	**GET** ``/rules/<rules_id>``
