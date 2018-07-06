@@ -165,7 +165,7 @@ def getUnmatchedBets(bettor_id):
 
 @app.route("/bettors/<bettor_id>/history", methods=['GET'])
 def getHistory(bettor_id):
-	response = requests.post(market_maker_url + request.full_path)
+	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
 @app.route("/sports", methods=['GET'])
