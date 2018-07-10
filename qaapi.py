@@ -82,6 +82,11 @@ def cancelBets(bet_id):
 			- type: string
 			- description: account name or account id
 
+	* path-params:
+		+ bet_id:
+			- type: string
+			- description: bet id
+
 	* returns:
 		+ 200:
 		.. code-block:: json
@@ -113,6 +118,59 @@ def cancelBets(bet_id):
 	"""
 	# TODO cancel by event id, bmg id
 	response = requests.delete(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bettors/<bettor_id>/matchedBets", methods=['GET'])
+def getMatchedBets(bettor_id):
+	"""
+	**GET** ``/bettors/<bettor_id>/matchedBets``
+
+	* path-params:
+		+ bettor_id:
+			- type: string
+			- description: account name
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			[
+			    {
+			        "amount_matched": 295400,
+			        "amount_to_bet": {
+			            "amount": 4600,
+			            "asset_id": "1.3.1"
+			        },
+			        "associated_operations": [
+			            "1.11.13540",
+			            "1.11.13558"
+			        ],
+			        "back_or_lay": "back",
+			        "backer_multiplier": 0,
+			        "betting_market_id": "1.21.3135",
+			        "bettor_id": "1.2.104",
+			        "id": "1.22.794"
+			    },
+			    {
+			        "amount_matched": 295400,
+			        "amount_to_bet": {
+			            "amount": 4600,
+			            "asset_id": "1.3.1"
+			        },
+			        "associated_operations": [
+			            "1.11.13533",
+			            "1.11.13557"
+			        ],
+			        "back_or_lay": "back",
+			        "backer_multiplier": 0,
+			        "betting_market_id": "1.21.3134",
+			        "bettor_id": "1.2.104",
+			        "id": "1.22.792"
+			    }
+			]	
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
 @app.route("/bettors/<bettor_id>/unmatchedBets", methods=['GET'])
@@ -162,11 +220,6 @@ def getUnmatchedBets(bettor_id):
 # def getMatchedBets(bettor_id):
 # 	response = requests.get(market_maker_url + request.full_path)
 # 	return (response.content, response.status_code, response.headers.items())
-
-@app.route("/bettors/<bettor_id>/history", methods=['GET'])
-def getHistory(bettor_id):
-	response = requests.get(market_maker_url + request.full_path)
-	return (response.content, response.status_code, response.headers.items())
 
 @app.route("/sports", methods=['GET'])
 def getSports():
@@ -223,6 +276,11 @@ def getEventGroups(sport_id):
 	"""
 	**GET** ``/sports/<sport_id>/eventGroups``
 
+	* path-params:
+		+ sport_id:
+			- type: string
+			- description: sport id
+
 	* returns:
 		+ 200:
 		.. code-block:: json
@@ -274,6 +332,11 @@ def getEventGroups(sport_id):
 def getEvents(event_group_id):
 	"""
 	**GET** ``/eventGroups/<event_group_id>/events``
+
+	* path-params:
+		+ event_group_id:
+			- type: string
+			- description: event group id
 
 	* returns:
 		+ 200:
@@ -328,6 +391,11 @@ def getEvents(event_group_id):
 def getBettingMarketGroups(event_id):
 	"""
 	**GET** ``/events/<event_id>/bettingMarketGroups``
+
+	* path-params:
+		+ event_id:
+			- type: string
+			- description: event id
 
 	* returns:
 		+ 200:
@@ -395,6 +463,11 @@ def getBettingMarkets(bmg_id):
 	"""
 	**GET** ``/bettingMarketGroups/<bmg_id>/bettingMarkets``
 
+	* path-params:
+		+ bmg_id:
+			- type: string
+			- description: betting market group id
+
 	* returns:
 		+ 200:
 		.. code-block:: json
@@ -450,6 +523,10 @@ def getRules(rules_id):
 	"""
 	**GET** ``/rules/<rules_id>``
 
+	* path-params:
+		+ rules_id:
+			- type: string
+			- description: rules id
 	* returns:
 		+ 200:
 		.. code-block:: json
@@ -476,6 +553,166 @@ def getRules(rules_id):
 			            "R_Soccer_OU_5.5_1"
 			        ]
 			    ]
+			}
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+# Other Calls
+
+@app.route("/bettors/<bettor_id>/history", methods=['GET'])
+def getHistory(bettor_id):
+	"""
+	**GET** ``/bettors/<bettor_id>/history``
+
+	* path-params:
+		+ bettor_id:
+			- type: string
+			- description: account name or id
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			[
+			    {
+			        "block_num": 1046928,
+			        "id": "1.11.13588",
+			        "op": [
+			            64,
+			            {
+			                "betting_market_group_id": "1.20.1500",
+			                "bettor_id": "1.2.104",
+			                "fee": {
+			                    "amount": 0,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fees_paid": 0,
+			                "resolutions": [
+			                    [
+			                        "1.21.3130",
+			                        "win"
+			                    ],
+			                    [
+			                        "1.21.3131",
+			                        "not_win"
+			                    ]
+			                ],
+			                "winnings": 1495318
+			            }
+			        ],
+			        "op_in_trx": 1,
+			        "result": [
+			            0,
+			            {}
+			        ],
+			        "trx_in_block": 1,
+			        "virtual_op": 33813
+			    }
+			]	
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bettors/<bettor_id>/accountDetails", methods=['GET'])
+def getAccountDetails(bettor_id):
+	"""
+	**GET** ``/bettors/<bettor_id>/accountDetails``
+
+	* path-params:
+		+ bettor_id:
+			- type: string
+			- description: account name or id
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			{
+			    "active": {
+			        "account_auths": [],
+			        "address_auths": [],
+			        "key_auths": [
+			            [
+			                "PPY6EACxBdQcHFPXij4UY6ZkpcqpQ6GsyzRTUV5o4zYef9AdqPz44",
+			                1
+			            ]
+			        ],
+			        "weight_threshold": 1
+			    },
+			    "active_special_authority": [
+			        0,
+			        {}
+			    ],
+			    "assets": [],
+			    "balances": [
+			        {
+			            "asset_type": "1.3.1",
+			            "balance": 1092830104,
+			            "id": "2.5.114",
+			            "owner": "1.2.104"
+			        }
+			    ],
+			    "blacklisted_accounts": [],
+			    "blacklisting_accounts": [],
+			    "call_orders": [],
+			    "id": "1.2.104",
+			    "lifetime_referrer": "1.2.19",
+			    "lifetime_referrer_fee_percentage": 3000,
+			    "lifetime_referrer_name": "bookie-faucet",
+			    "limit_orders": [],
+			    "membership_expiration_date": "1970-01-01T00:00:00",
+			    "name": "bettor1",
+			    "network_fee_percentage": 2000,
+			    "options": {
+			        "extensions": [],
+			        "memo_key": "PPY8AAdJSiRLqYWsiXyrAKJ2THh1h69bg73Vw94QbM6Bt7PaT6FNv",
+			        "num_committee": 0,
+			        "num_witness": 0,
+			        "votes": [],
+			        "voting_account": "1.2.5"
+			    },
+			    "owner": {
+			        "account_auths": [],
+			        "address_auths": [],
+			        "key_auths": [
+			            [
+			                "PPY8TM2Tj5AvEqBCoaXnTCBomExR2EkKcdDtQTPVKAoPGaF3ouiii",
+			                1
+			            ]
+			        ],
+			        "weight_threshold": 1
+			    },
+			    "owner_special_authority": [
+			        0,
+			        {}
+			    ],
+			    "pending_dividend_payments": [],
+			    "proposals": [],
+			    "referrer": "1.2.19",
+			    "referrer_name": "bookie-faucet",
+			    "referrer_rewards_percentage": 5000,
+			    "registrar": "1.2.19",
+			    "registrar_name": "bookie-faucet",
+			    "settle_orders": [],
+			    "statistics": {
+			        "id": "2.6.104",
+			        "lifetime_fees_paid": 2214476,
+			        "most_recent_op": "2.9.15061",
+			        "owner": "1.2.104",
+			        "pending_fees": 0,
+			        "pending_vested_fees": 0,
+			        "removed_ops": 0,
+			        "total_core_in_orders": 0,
+			        "total_ops": 658
+			    },
+			    "top_n_control_flags": 0,
+			    "vesting_balances": [],
+			    "votes": [],
+			    "whitelisted_accounts": [],
+			    "whitelisting_accounts": [],
+			    "withdraws": []
 			}
 
 	"""

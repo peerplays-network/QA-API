@@ -116,6 +116,11 @@
 <span class="sd">			- type: string</span>
 <span class="sd">			- description: account name or account id</span>
 
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ bet_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: bet id</span>
+
 <span class="sd">	* returns:</span>
 <span class="sd">		+ 200:</span>
 <span class="sd">		.. code-block:: json</span>
@@ -147,6 +152,59 @@
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="c1"># TODO cancel by event id, bmg id</span>
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="getMatchedBets"><a class="viewcode-back" href="../qaapi.html#qaapi.getMatchedBets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettors/&lt;bettor_id&gt;/matchedBets&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">getMatchedBets</span><span class="p">(</span><span class="n">bettor_id</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**GET** ``/bettors/&lt;bettor_id&gt;/matchedBets``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ bettor_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: account name</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block:: json</span>
+
+<span class="sd">			[</span>
+<span class="sd">			    {</span>
+<span class="sd">			        &quot;amount_matched&quot;: 295400,</span>
+<span class="sd">			        &quot;amount_to_bet&quot;: {</span>
+<span class="sd">			            &quot;amount&quot;: 4600,</span>
+<span class="sd">			            &quot;asset_id&quot;: &quot;1.3.1&quot;</span>
+<span class="sd">			        },</span>
+<span class="sd">			        &quot;associated_operations&quot;: [</span>
+<span class="sd">			            &quot;1.11.13540&quot;,</span>
+<span class="sd">			            &quot;1.11.13558&quot;</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;back_or_lay&quot;: &quot;back&quot;,</span>
+<span class="sd">			        &quot;backer_multiplier&quot;: 0,</span>
+<span class="sd">			        &quot;betting_market_id&quot;: &quot;1.21.3135&quot;,</span>
+<span class="sd">			        &quot;bettor_id&quot;: &quot;1.2.104&quot;,</span>
+<span class="sd">			        &quot;id&quot;: &quot;1.22.794&quot;</span>
+<span class="sd">			    },</span>
+<span class="sd">			    {</span>
+<span class="sd">			        &quot;amount_matched&quot;: 295400,</span>
+<span class="sd">			        &quot;amount_to_bet&quot;: {</span>
+<span class="sd">			            &quot;amount&quot;: 4600,</span>
+<span class="sd">			            &quot;asset_id&quot;: &quot;1.3.1&quot;</span>
+<span class="sd">			        },</span>
+<span class="sd">			        &quot;associated_operations&quot;: [</span>
+<span class="sd">			            &quot;1.11.13533&quot;,</span>
+<span class="sd">			            &quot;1.11.13557&quot;</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;back_or_lay&quot;: &quot;back&quot;,</span>
+<span class="sd">			        &quot;backer_multiplier&quot;: 0,</span>
+<span class="sd">			        &quot;betting_market_id&quot;: &quot;1.21.3134&quot;,</span>
+<span class="sd">			        &quot;bettor_id&quot;: &quot;1.2.104&quot;,</span>
+<span class="sd">			        &quot;id&quot;: &quot;1.22.792&quot;</span>
+<span class="sd">			    }</span>
+<span class="sd">			]	</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="getUnmatchedBets"><a class="viewcode-back" href="../qaapi.html#qaapi.getUnmatchedBets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettors/&lt;bettor_id&gt;/unmatchedBets&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
@@ -196,11 +254,6 @@
 <span class="c1"># def getMatchedBets(bettor_id):</span>
 <span class="c1"># 	response = requests.get(market_maker_url + request.full_path)</span>
 <span class="c1"># 	return (response.content, response.status_code, response.headers.items())</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettors/&lt;bettor_id&gt;/history&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">getHistory</span><span class="p">(</span><span class="n">bettor_id</span><span class="p">):</span>
-	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
-	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
 <div class="viewcode-block" id="getSports"><a class="viewcode-back" href="../qaapi.html#qaapi.getSports">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/sports&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getSports</span><span class="p">():</span>
@@ -252,10 +305,15 @@
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="getEventGroups"><a class="viewcode-back" href="../qaapi.html#qaapi.getEventGroups">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/sports/&lt;sport_id&gt;/eventGroups&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="getEventGroups"><a class="viewcode-back" href="../qaapi.html#qaapi.getEventGroups">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/sports/&lt;sport_id&gt;/eventGroups&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getEventGroups</span><span class="p">(</span><span class="n">sport_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	**GET** ``/sports/&lt;sport_id&gt;/eventGroups``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ sport_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: sport id</span>
 
 <span class="sd">	* returns:</span>
 <span class="sd">		+ 200:</span>
@@ -304,10 +362,15 @@
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="getEvents"><a class="viewcode-back" href="../qaapi.html#qaapi.getEvents">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/eventGroups/&lt;event_group_id&gt;/events&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="getEvents"><a class="viewcode-back" href="../qaapi.html#qaapi.getEvents">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/eventGroups/&lt;event_group_id&gt;/events&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getEvents</span><span class="p">(</span><span class="n">event_group_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	**GET** ``/eventGroups/&lt;event_group_id&gt;/events``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ event_group_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: event group id</span>
 
 <span class="sd">	* returns:</span>
 <span class="sd">		+ 200:</span>
@@ -358,10 +421,15 @@
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="getBettingMarketGroups"><a class="viewcode-back" href="../qaapi.html#qaapi.getBettingMarketGroups">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events/&lt;event_id&gt;/bettingMarketGroups&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="getBettingMarketGroups"><a class="viewcode-back" href="../qaapi.html#qaapi.getBettingMarketGroups">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events/&lt;event_id&gt;/bettingMarketGroups&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getBettingMarketGroups</span><span class="p">(</span><span class="n">event_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	**GET** ``/events/&lt;event_id&gt;/bettingMarketGroups``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ event_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: event id</span>
 
 <span class="sd">	* returns:</span>
 <span class="sd">		+ 200:</span>
@@ -424,10 +492,15 @@
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="getBettingMarkets"><a class="viewcode-back" href="../qaapi.html#qaapi.getBettingMarkets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarketGroups/&lt;bmg_id&gt;/bettingMarkets&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="getBettingMarkets"><a class="viewcode-back" href="../qaapi.html#qaapi.getBettingMarkets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarketGroups/&lt;bmg_id&gt;/bettingMarkets&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getBettingMarkets</span><span class="p">(</span><span class="n">bmg_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	**GET** ``/bettingMarketGroups/&lt;bmg_id&gt;/bettingMarkets``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ bmg_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: betting market group id</span>
 
 <span class="sd">	* returns:</span>
 <span class="sd">		+ 200:</span>
@@ -479,11 +552,15 @@
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="getRules"><a class="viewcode-back" href="../qaapi.html#qaapi.getRules">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/rules/&lt;rules_id&gt;&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="getRules"><a class="viewcode-back" href="../qaapi.html#qaapi.getRules">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/rules/&lt;rules_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">getRules</span><span class="p">(</span><span class="n">rules_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	**GET** ``/rules/&lt;rules_id&gt;``</span>
 
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ rules_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: rules id</span>
 <span class="sd">	* returns:</span>
 <span class="sd">		+ 200:</span>
 <span class="sd">		.. code-block:: json</span>
@@ -510,6 +587,166 @@
 <span class="sd">			            &quot;R_Soccer_OU_5.5_1&quot;</span>
 <span class="sd">			        ]</span>
 <span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+
+<span class="c1"># Other Calls</span>
+
+<div class="viewcode-block" id="getHistory"><a class="viewcode-back" href="../qaapi.html#qaapi.getHistory">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettors/&lt;bettor_id&gt;/history&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">getHistory</span><span class="p">(</span><span class="n">bettor_id</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**GET** ``/bettors/&lt;bettor_id&gt;/history``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ bettor_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: account name or id</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block:: json</span>
+
+<span class="sd">			[</span>
+<span class="sd">			    {</span>
+<span class="sd">			        &quot;block_num&quot;: 1046928,</span>
+<span class="sd">			        &quot;id&quot;: &quot;1.11.13588&quot;,</span>
+<span class="sd">			        &quot;op&quot;: [</span>
+<span class="sd">			            64,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;betting_market_group_id&quot;: &quot;1.20.1500&quot;,</span>
+<span class="sd">			                &quot;bettor_id&quot;: &quot;1.2.104&quot;,</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fees_paid&quot;: 0,</span>
+<span class="sd">			                &quot;resolutions&quot;: [</span>
+<span class="sd">			                    [</span>
+<span class="sd">			                        &quot;1.21.3130&quot;,</span>
+<span class="sd">			                        &quot;win&quot;</span>
+<span class="sd">			                    ],</span>
+<span class="sd">			                    [</span>
+<span class="sd">			                        &quot;1.21.3131&quot;,</span>
+<span class="sd">			                        &quot;not_win&quot;</span>
+<span class="sd">			                    ]</span>
+<span class="sd">			                ],</span>
+<span class="sd">			                &quot;winnings&quot;: 1495318</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;op_in_trx&quot;: 1,</span>
+<span class="sd">			        &quot;result&quot;: [</span>
+<span class="sd">			            0,</span>
+<span class="sd">			            {}</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;trx_in_block&quot;: 1,</span>
+<span class="sd">			        &quot;virtual_op&quot;: 33813</span>
+<span class="sd">			    }</span>
+<span class="sd">			]	</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="getAccountDetails"><a class="viewcode-back" href="../qaapi.html#qaapi.getAccountDetails">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettors/&lt;bettor_id&gt;/accountDetails&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">getAccountDetails</span><span class="p">(</span><span class="n">bettor_id</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**GET** ``/bettors/&lt;bettor_id&gt;/accountDetails``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ bettor_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: account name or id</span>
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;active&quot;: {</span>
+<span class="sd">			        &quot;account_auths&quot;: [],</span>
+<span class="sd">			        &quot;address_auths&quot;: [],</span>
+<span class="sd">			        &quot;key_auths&quot;: [</span>
+<span class="sd">			            [</span>
+<span class="sd">			                &quot;PPY6EACxBdQcHFPXij4UY6ZkpcqpQ6GsyzRTUV5o4zYef9AdqPz44&quot;,</span>
+<span class="sd">			                1</span>
+<span class="sd">			            ]</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;weight_threshold&quot;: 1</span>
+<span class="sd">			    },</span>
+<span class="sd">			    &quot;active_special_authority&quot;: [</span>
+<span class="sd">			        0,</span>
+<span class="sd">			        {}</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;assets&quot;: [],</span>
+<span class="sd">			    &quot;balances&quot;: [</span>
+<span class="sd">			        {</span>
+<span class="sd">			            &quot;asset_type&quot;: &quot;1.3.1&quot;,</span>
+<span class="sd">			            &quot;balance&quot;: 1092830104,</span>
+<span class="sd">			            &quot;id&quot;: &quot;2.5.114&quot;,</span>
+<span class="sd">			            &quot;owner&quot;: &quot;1.2.104&quot;</span>
+<span class="sd">			        }</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;blacklisted_accounts&quot;: [],</span>
+<span class="sd">			    &quot;blacklisting_accounts&quot;: [],</span>
+<span class="sd">			    &quot;call_orders&quot;: [],</span>
+<span class="sd">			    &quot;id&quot;: &quot;1.2.104&quot;,</span>
+<span class="sd">			    &quot;lifetime_referrer&quot;: &quot;1.2.19&quot;,</span>
+<span class="sd">			    &quot;lifetime_referrer_fee_percentage&quot;: 3000,</span>
+<span class="sd">			    &quot;lifetime_referrer_name&quot;: &quot;bookie-faucet&quot;,</span>
+<span class="sd">			    &quot;limit_orders&quot;: [],</span>
+<span class="sd">			    &quot;membership_expiration_date&quot;: &quot;1970-01-01T00:00:00&quot;,</span>
+<span class="sd">			    &quot;name&quot;: &quot;bettor1&quot;,</span>
+<span class="sd">			    &quot;network_fee_percentage&quot;: 2000,</span>
+<span class="sd">			    &quot;options&quot;: {</span>
+<span class="sd">			        &quot;extensions&quot;: [],</span>
+<span class="sd">			        &quot;memo_key&quot;: &quot;PPY8AAdJSiRLqYWsiXyrAKJ2THh1h69bg73Vw94QbM6Bt7PaT6FNv&quot;,</span>
+<span class="sd">			        &quot;num_committee&quot;: 0,</span>
+<span class="sd">			        &quot;num_witness&quot;: 0,</span>
+<span class="sd">			        &quot;votes&quot;: [],</span>
+<span class="sd">			        &quot;voting_account&quot;: &quot;1.2.5&quot;</span>
+<span class="sd">			    },</span>
+<span class="sd">			    &quot;owner&quot;: {</span>
+<span class="sd">			        &quot;account_auths&quot;: [],</span>
+<span class="sd">			        &quot;address_auths&quot;: [],</span>
+<span class="sd">			        &quot;key_auths&quot;: [</span>
+<span class="sd">			            [</span>
+<span class="sd">			                &quot;PPY8TM2Tj5AvEqBCoaXnTCBomExR2EkKcdDtQTPVKAoPGaF3ouiii&quot;,</span>
+<span class="sd">			                1</span>
+<span class="sd">			            ]</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;weight_threshold&quot;: 1</span>
+<span class="sd">			    },</span>
+<span class="sd">			    &quot;owner_special_authority&quot;: [</span>
+<span class="sd">			        0,</span>
+<span class="sd">			        {}</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;pending_dividend_payments&quot;: [],</span>
+<span class="sd">			    &quot;proposals&quot;: [],</span>
+<span class="sd">			    &quot;referrer&quot;: &quot;1.2.19&quot;,</span>
+<span class="sd">			    &quot;referrer_name&quot;: &quot;bookie-faucet&quot;,</span>
+<span class="sd">			    &quot;referrer_rewards_percentage&quot;: 5000,</span>
+<span class="sd">			    &quot;registrar&quot;: &quot;1.2.19&quot;,</span>
+<span class="sd">			    &quot;registrar_name&quot;: &quot;bookie-faucet&quot;,</span>
+<span class="sd">			    &quot;settle_orders&quot;: [],</span>
+<span class="sd">			    &quot;statistics&quot;: {</span>
+<span class="sd">			        &quot;id&quot;: &quot;2.6.104&quot;,</span>
+<span class="sd">			        &quot;lifetime_fees_paid&quot;: 2214476,</span>
+<span class="sd">			        &quot;most_recent_op&quot;: &quot;2.9.15061&quot;,</span>
+<span class="sd">			        &quot;owner&quot;: &quot;1.2.104&quot;,</span>
+<span class="sd">			        &quot;pending_fees&quot;: 0,</span>
+<span class="sd">			        &quot;pending_vested_fees&quot;: 0,</span>
+<span class="sd">			        &quot;removed_ops&quot;: 0,</span>
+<span class="sd">			        &quot;total_core_in_orders&quot;: 0,</span>
+<span class="sd">			        &quot;total_ops&quot;: 658</span>
+<span class="sd">			    },</span>
+<span class="sd">			    &quot;top_n_control_flags&quot;: 0,</span>
+<span class="sd">			    &quot;vesting_balances&quot;: [],</span>
+<span class="sd">			    &quot;votes&quot;: [],</span>
+<span class="sd">			    &quot;whitelisted_accounts&quot;: [],</span>
+<span class="sd">			    &quot;whitelisting_accounts&quot;: [],</span>
+<span class="sd">			    &quot;withdraws&quot;: []</span>
 <span class="sd">			}</span>
 
 <span class="sd">	&quot;&quot;&quot;</span>
