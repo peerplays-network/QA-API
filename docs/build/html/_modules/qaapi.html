@@ -106,6 +106,47 @@
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">,</span> <span class="n">json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">())</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
 
+<div class="viewcode-block" id="placeSingleBet"><a class="viewcode-back" href="../qaapi.html#qaapi.placeSingleBet">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/placeSingleBet&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">placeSingleBet</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**POST** ``/placeSingleBet``</span>
+
+<span class="sd">	* query-params:</span>
+<span class="sd">		+ account:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: account name or account id</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;asset_symbol&quot;: &quot;BTF&quot;,</span>
+<span class="sd">			&quot;bet_amount&quot;: 1,</span>
+<span class="sd">			&quot;betting_market_id&quot;: &quot;1.21.3295&quot;,</span>
+<span class="sd">			&quot;odds&quot;: 1.44,</span>
+<span class="sd">			&quot;back_or_lay&quot;: &quot;back&quot;</span>
+<span class="sd">		}</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;amount_to_bet&quot;: {</span>
+<span class="sd">			        &quot;amount&quot;: 10000000,</span>
+<span class="sd">			        &quot;asset_id&quot;: &quot;1.3.1&quot;</span>
+<span class="sd">			    },</span>
+<span class="sd">			    &quot;back_or_lay&quot;: &quot;back&quot;,</span>
+<span class="sd">			    &quot;backer_multiplier&quot;: 100000,</span>
+<span class="sd">			    &quot;betting_market_id&quot;: &quot;1.21.3295&quot;,</span>
+<span class="sd">			    &quot;bettor_id&quot;: &quot;1.2.104&quot;,</span>
+<span class="sd">			    &quot;id&quot;: &quot;1.22.1074&quot;</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">,</span> <span class="n">json</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">())</span>
+	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+
 <div class="viewcode-block" id="cancelBets"><a class="viewcode-back" href="../qaapi.html#qaapi.cancelBets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bets/&lt;bet_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DELETE&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">cancelBets</span><span class="p">(</span><span class="n">bet_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>

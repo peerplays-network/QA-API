@@ -72,6 +72,47 @@ def placeBets():
 	response = requests.post(market_maker_url + request.full_path, json = request.get_json())
 	return (response.content, response.status_code, response.headers.items())
 
+@app.route("/placeSingleBet", methods=['POST'])
+def placeSingleBet():
+	"""
+	**POST** ``/placeSingleBet``
+
+	* query-params:
+		+ account:
+			- type: string
+			- description: account name or account id
+
+	* body:
+	.. code-block:: json
+
+		{
+			"asset_symbol": "BTF",
+			"bet_amount": 1,
+			"betting_market_id": "1.21.3295",
+			"odds": 1.44,
+			"back_or_lay": "back"
+		}
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			{
+			    "amount_to_bet": {
+			        "amount": 10000000,
+			        "asset_id": "1.3.1"
+			    },
+			    "back_or_lay": "back",
+			    "backer_multiplier": 100000,
+			    "betting_market_id": "1.21.3295",
+			    "bettor_id": "1.2.104",
+			    "id": "1.22.1074"
+			}
+
+	"""
+	response = requests.post(market_maker_url + request.full_path, json = request.get_json())
+	return (response.content, response.status_code, response.headers.items())
+
 @app.route("/bets/<bet_id>", methods=['DELETE'])
 def cancelBets(bet_id):
 	"""

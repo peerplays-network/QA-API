@@ -916,6 +916,63 @@
 </ul>
 </dd></dl>
 
+<dl class="function">
+<dt id="qaapi.placeSingleBet">
+<code class="descclassname">qaapi.</code><code class="descname">placeSingleBet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#placeSingleBet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.placeSingleBet" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/placeSingleBet</span></code></p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>query-params:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>account:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name or account id</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;asset_symbol&quot;</span><span class="p">:</span> <span class="s2">&quot;BTF&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;bet_amount&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3295&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;odds&quot;</span><span class="p">:</span> <span class="mf">1.44</span><span class="p">,</span>
+        <span class="nt">&quot;back_or_lay&quot;</span><span class="p">:</span> <span class="s2">&quot;back&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;amount_to_bet&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">10000000</span><span class="p">,</span>
+        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+    <span class="p">},</span>
+    <span class="nt">&quot;back_or_lay&quot;</span><span class="p">:</span> <span class="s2">&quot;back&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;backer_multiplier&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
+    <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3295&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.1074&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
 </div>
 
 
