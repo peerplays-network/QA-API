@@ -257,10 +257,40 @@ def getUnmatchedBets(bettor_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
-# @app.route("/bettors/<bettor_id>/matchedBets", methods=['GET'])
-# def getMatchedBets(bettor_id):
-# 	response = requests.get(market_maker_url + request.full_path)
-# 	return (response.content, response.status_code, response.headers.items())
+@app.route("/sports/<sport_id>", methods=['GET'])
+def getSport(sport_id):
+	"""
+	**GET** ``/sports/<sport_id>``
+
+	* path-params:
+		+ sport_id
+			- type: string
+			- description: sport id
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+		    {
+		        "id": "1.16.0",
+		        "name": [
+		            [
+		                "en",
+		                "Soccer"
+		            ],
+		            [
+		                "identifier",
+		                "Soccer"
+		            ],
+		            [
+		                "sen",
+		                "Soccer"
+		            ]
+		        ]
+		    }	
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
 
 @app.route("/sports", methods=['GET'])
 def getSports():
@@ -307,6 +337,43 @@ def getSports():
 			        ]
 			    },
 			]	
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/eventGroups/<event_group_id>", methods=['GET'])
+def getEventGroup(event_group_id):
+	"""
+	**GET** ``/sports/<sport_id>/eventGroups``
+
+	* path-params:
+		+ sport_id:
+			- type: string
+			- description: sport id
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+		    {
+		        "id": "1.17.1",
+		        "name": [
+		            [
+		                "en",
+		                "UEFA Europa League"
+		            ],
+		            [
+		                "identifier",
+		                "UEFA Europa League"
+		            ],
+		            [
+		                "sen",
+		                "Europa League"
+		            ]
+		        ],
+		        "sport_id": "1.16.0"
+		    }
 
 	"""
 	response = requests.get(market_maker_url + request.full_path)
@@ -369,6 +436,44 @@ def getEventGroups(sport_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
+@app.route("/events/<event_id>", methods=['GET'])
+def getEvent(event_id):
+	"""
+	**GET** ``/events/<event_id>``
+
+	* path-params:
+		+ event_id:
+			- type: string
+			- description: event id
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+		    {
+		        "event_group_id": "1.17.8",
+		        "id": "1.18.286",
+		        "name": [
+		            [
+		                "en",
+		                "Uruguay v France"
+		            ]
+		        ],
+		        "scores": [],
+		        "season": [
+		            [
+		                "en",
+		                "2018"
+		            ]
+		        ],
+		        "start_time": "2018-07-06T14:00:00",
+		        "status": "upcoming"
+		    }
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
 @app.route("/eventGroups/<event_group_id>/events", methods=['GET'])
 def getEvents(event_group_id):
 	"""
@@ -423,6 +528,50 @@ def getEvents(event_group_id):
 			        "status": "upcoming"
 			    }
 			]
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bettingMarketGroups/<bmg_id>", methods=['GET'])
+def getBettingMarketGroup(bmg_id):
+	"""
+	**GET** ``/bettingMarketGroups/<bmg_id>``
+
+	* path-params:
+		+ bmg_id:
+			- type: string
+			- description: bmg id
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+		    {
+		        "asset_id": "1.3.1",
+		        "delay_before_settling": 0,
+		        "description": [
+		            [
+		                "display_name",
+		                "Match Odds"
+		            ],
+		            [
+		                "en",
+		                "Match Odds"
+		            ],
+		            [
+		                "sen",
+		                "Match Odds"
+		            ]
+		        ],
+		        "event_id": "1.18.286",
+		        "id": "1.20.1495",
+		        "never_in_play": false,
+		        "rules_id": "1.19.1",
+		        "settling_time": null,
+		        "status": "upcoming",
+		        "total_matched_bets_amount": 3993000
+		    }
 
 	"""
 	response = requests.get(market_maker_url + request.full_path)
@@ -494,6 +643,82 @@ def getBettingMarketGroups(event_id):
 			        "total_matched_bets_amount": 0
 			    }
 			]
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bettingMarket", methods=['GET'])
+def getBettingMarketByQuery():
+	"""
+	**GET** ``/bettingMarket``
+
+	* query-params:
+		+ sport:
+			- type: string
+			- description: sport name
+		+ eventGroup:
+			- type: string
+			- description: event group name
+		+ event:
+			- type: string
+			- description: event name
+		+ bettingMarketGroup:
+			- type: string
+			- description: betting market group name
+		+ bettingMarket:
+			- type: string
+			- description: betting market name
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+		    {
+		        "description": [
+		            [
+		                "en",
+		                "Philadelphia Phillies"
+		            ]
+		        ],
+		        "group_id": "1.20.1578",
+		        "id": "1.21.3292",
+		        "payout_condition": [],
+		        "resolution": null,
+		        "status": "unresolved"
+		    }
+
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bettingMarkets/<betting_market_id>", methods=['GET'])
+def getBettingMarket(betting_market_id):
+	"""
+	**GET** ``/bettingMarkets/<betting_market_id>``
+
+	* path-params:
+		+ betting_market_id:
+			- type: string
+			- description: betting market id
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+		    {
+		        "description": [
+		            [
+		                "en",
+		                "Philadelphia Phillies"
+		            ]
+		        ],
+		        "group_id": "1.20.1578",
+		        "id": "1.21.3292",
+		        "payout_condition": [],
+		        "resolution": null,
+		        "status": "unresolved"
+		    }
 
 	"""
 	response = requests.get(market_maker_url + request.full_path)
