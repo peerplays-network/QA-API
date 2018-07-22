@@ -825,6 +825,13 @@ def getRules(rules_id):
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
+# MINT Calls
+
+@app.route("/sports", methods=['POST'])
+def createSport():
+	response = requests.post(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
 # Other Calls
 
 @app.route("/bettors/<bettor_id>/history", methods=['GET'])
