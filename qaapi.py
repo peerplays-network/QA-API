@@ -289,6 +289,7 @@ def getSport(sport_id):
 		    }	
 
 	"""
+	print("Hellu")
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
@@ -829,6 +830,7 @@ def getRules(rules_id):
 
 @app.route("/sports", methods=['POST'])
 def createSport():
+	print("Hi")
 	response = requests.post(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
