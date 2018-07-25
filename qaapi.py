@@ -114,7 +114,7 @@ def placeSingleBet():
 	return (response.content, response.status_code, response.headers.items())
 
 @app.route("/bets/<bet_id>", methods=['DELETE'])
-def cancelBets(bet_id):
+def cancelBet(bet_id):
 	"""
 	**DELETE** ``/bets/<bet_id>``
 
@@ -127,6 +127,57 @@ def cancelBets(bet_id):
 		+ bet_id:
 			- type: string
 			- description: bet id
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			{
+			    "expiration": "2018-07-05T04:15:16",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            68,
+			            {
+			                "bet_to_cancel": "1.22.533",
+			                "bettor_id": "1.2.18",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 0,
+			                    "asset_id": "1.3.1"
+			                }
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 22274,
+			    "ref_block_prefix": 3672811153,
+			    "signatures": [
+			        "201e63f37f76aa86639bb6a2f74affddef453371d065ee2748a050962d191cf19054acb1c6f0646a9e646ae12e2ac569d816208619447c5b86b385d041e1aab06c"
+			    ]
+			}
+
+	"""
+	# TODO cancel by event id, bmg id
+	response = requests.delete(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bets", methods=['DELETE'])
+def cancelBets():
+	"""
+	**DELETE** ``/bets``
+
+	* query-params:
+		+ account:
+			- type: string
+			- description: account name or account id
+
+	* body:
+	.. code-block:: json
+
+		[
+			"1.22.1072",
+			"1.22.1074"
+		]
 
 	* returns:
 		+ 200:
