@@ -170,46 +170,74 @@ def cancelBets():
 		+ account:
 			- type: string
 			- description: account name or account id
+			- required: True
 
 	* body:
 	.. code-block:: json
 
-		[
-			"1.22.1072",
-			"1.22.1074"
-		]
+		{
+			"ids": [
+				"1.22.1166", 
+				"1.22.1167"
+			]
+		}
 
 	* returns:
 		+ 200:
 		.. code-block:: json
 
-			{
-			    "expiration": "2018-07-05T04:15:16",
-			    "extensions": [],
-			    "operations": [
-			        [
-			            68,
-			            {
-			                "bet_to_cancel": "1.22.533",
-			                "bettor_id": "1.2.18",
-			                "extensions": [],
-			                "fee": {
-			                    "amount": 0,
-			                    "asset_id": "1.3.1"
+			[
+			    {
+			        "expiration": "2018-07-26T05:11:48",
+			        "extensions": [],
+			        "operations": [
+			            [
+			                68,
+			                {
+			                    "bet_to_cancel": "1.22.1166",
+			                    "bettor_id": "1.2.104",
+			                    "extensions": [],
+			                    "fee": {
+			                        "amount": 0,
+			                        "asset_id": "1.3.0"
+			                    }
 			                }
-			            }
+			            ]
+			        ],
+			        "ref_block_num": 20203,
+			        "ref_block_prefix": 1203983718,
+			        "signatures": [
+			            "1f616b8f816ba2abb31ba17d57a02be50a86b58ebc6e44ebe9b0d1ce881c3c54db09a9fa18142ef6ff5faacddf6b2767b59390acb9907dd366ca67788d96d91881"
 			        ]
-			    ],
-			    "ref_block_num": 22274,
-			    "ref_block_prefix": 3672811153,
-			    "signatures": [
-			        "201e63f37f76aa86639bb6a2f74affddef453371d065ee2748a050962d191cf19054acb1c6f0646a9e646ae12e2ac569d816208619447c5b86b385d041e1aab06c"
-			    ]
-			}
+			    },
+			    {
+			        "expiration": "2018-07-26T05:11:49",
+			        "extensions": [],
+			        "operations": [
+			            [
+			                68,
+			                {
+			                    "bet_to_cancel": "1.22.1167",
+			                    "bettor_id": "1.2.104",
+			                    "extensions": [],
+			                    "fee": {
+			                        "amount": 0,
+			                        "asset_id": "1.3.0"
+			                    }
+			                }
+			            ]
+			        ],
+			        "ref_block_num": 20203,
+			        "ref_block_prefix": 1203983718,
+			        "signatures": [
+			            "20420e197512d5bcfc30f65c11629212b0363959a9f5692fbfc85180343c56d489389224e64cfffebf430cc6a7058a8d79ce1a1aab0ec4a23ef28289d86f3e232d"
+			        ]
+			    }
+			]
 
 	"""
 	# TODO cancel by event id, bmg id
-	response = requests.delete(market_maker_url + request.full_path)
+	response = requests.delete(market_maker_url + request.full_path, json = request.get_json())
 	return (response.content, response.status_code, response.headers.items())
 
 @app.route("/bettors/<bettor_id>/matchedBets", methods=['GET'])
