@@ -831,7 +831,7 @@ def getRules(rules_id):
 @app.route("/sports", methods=['POST'])
 def createSport():
 	print("Hi")
-	response = requests.post(market_maker_url + request.full_path)
+	response = requests.post(market_maker_url + request.full_path, json = request.get_json())
 	return (response.content, response.status_code, response.headers.items())
 
 # Other Calls
