@@ -34,8 +34,8 @@
   <div class="section" id="module-qaapi">
 <span id="qaapi-module"></span><h1>qaapi module<a class="headerlink" href="#module-qaapi" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="qaapi.cancelBets">
-<code class="descclassname">qaapi.</code><code class="descname">cancelBets</code><span class="sig-paren">(</span><em>bet_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBets" title="Permalink to this definition">¶</a></dt>
+<dt id="qaapi.cancelBet">
+<code class="descclassname">qaapi.</code><code class="descname">cancelBet</code><span class="sig-paren">(</span><em>bet_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBet" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>DELETE</strong> <code class="docutils literal notranslate"><span class="pre">/bets/&lt;bet_id&gt;</span></code></p>
 <ul>
 <li><dl class="first docutils">
@@ -99,6 +99,100 @@
         <span class="s2">&quot;201e63f37f76aa86639bb6a2f74affddef453371d065ee2748a050962d191cf19054acb1c6f0646a9e646ae12e2ac569d816208619447c5b86b385d041e1aab06c&quot;</span>
     <span class="p">]</span>
 <span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.cancelBets">
+<code class="descclassname">qaapi.</code><code class="descname">cancelBets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBets" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>DELETE</strong> <code class="docutils literal notranslate"><span class="pre">/bets</span></code></p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>query-params:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>account:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name or account id</li>
+<li>required: True</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;1.22.1166&quot;</span><span class="p">,</span> 
+                <span class="s2">&quot;1.22.1167&quot;</span>
+        <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-26T05:11:48&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="mi">68</span><span class="p">,</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;bet_to_cancel&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.1166&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                    <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">20203</span><span class="p">,</span>
+        <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1203983718</span><span class="p">,</span>
+        <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;1f616b8f816ba2abb31ba17d57a02be50a86b58ebc6e44ebe9b0d1ce881c3c54db09a9fa18142ef6ff5faacddf6b2767b59390acb9907dd366ca67788d96d91881&quot;</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-26T05:11:49&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="mi">68</span><span class="p">,</span>
+                <span class="p">{</span>
+                    <span class="nt">&quot;bet_to_cancel&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.1167&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
+                    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                    <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">20203</span><span class="p">,</span>
+        <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1203983718</span><span class="p">,</span>
+        <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;20420e197512d5bcfc30f65c11629212b0363959a9f5692fbfc85180343c56d489389224e64cfffebf430cc6a7058a8d79ce1a1aab0ec4a23ef28289d86f3e232d&quot;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 </pre></div>
 </div>
 </dd>
