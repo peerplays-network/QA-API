@@ -20,6 +20,7 @@ def placeBets():
 		+ account:
 			- type: string
 			- description: account name or account id
+			- required: True
 
 	* body:
 	.. code-block:: json
@@ -81,6 +82,7 @@ def placeSingleBet():
 		+ account:
 			- type: string
 			- description: account name or account id
+			- required: True
 
 	* body:
 	.. code-block:: json
@@ -122,6 +124,7 @@ def cancelBets(bet_id):
 		+ account:
 			- type: string
 			- description: account name or account id
+			- required: True
 
 	* path-params:
 		+ bet_id:
@@ -657,18 +660,23 @@ def getBettingMarketByQuery():
 		+ sport:
 			- type: string
 			- description: sport name
+			- required: True
 		+ eventGroup:
 			- type: string
 			- description: event group name
+			- required: True
 		+ event:
 			- type: string
 			- description: event name
+			- required: True
 		+ bettingMarketGroup:
 			- type: string
 			- description: betting market group name
+			- required: True
 		+ bettingMarket:
 			- type: string
 			- description: betting market name
+			- required: True
 
 	* returns:
 		+ 200:
@@ -824,6 +832,67 @@ def getRules(rules_id):
 	"""
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
+
+@app.route("/bettors/<bettor_id>/resolutions", methods=['GET'])
+def getResolutions(bettor_id):
+	"""
+	**GET** ``/bettors/<bettor_id>/resolutions``
+
+	* path-params:
+		+ bettor_id:
+			- type: string
+			- description: account name or id
+
+	* query-params:
+		+ bettingMarketGroup:
+			- type: string
+			- description: betting market group id
+			- required: False
+			
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			[
+			    {
+			        "block_num": 1046928,
+			        "id": "1.11.13588",
+			        "op": [
+			            64,
+			            {
+			                "betting_market_group_id": "1.20.1500",
+			                "bettor_id": "1.2.104",
+			                "fee": {
+			                    "amount": 0,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fees_paid": 0,
+			                "resolutions": [
+			                    [
+			                        "1.21.3130",
+			                        "win"
+			                    ],
+			                    [
+			                        "1.21.3131",
+			                        "not_win"
+			                    ]
+			                ],
+			                "winnings": 1495318
+			            }
+			        ],
+			        "op_in_trx": 1,
+			        "result": [
+			            0,
+			            {}
+			        ],
+			        "trx_in_block": 1,
+			        "virtual_op": 33813
+			    }
+			]
+	"""
+	response = requests.get(market_maker_url + request.full_path)
+	return (response.content, response.status_code, response.headers.items())
+
 
 # Other Calls
 

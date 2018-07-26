@@ -46,6 +46,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: account name or account id</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -285,6 +286,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: sport name</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -294,6 +296,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: event group name</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -303,6 +306,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: event name</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -312,6 +316,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: betting market group name</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -321,6 +326,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: betting market name</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -965,6 +971,93 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="qaapi.getResolutions">
+<code class="descclassname">qaapi.</code><code class="descname">getResolutions</code><span class="sig-paren">(</span><em>bettor_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getResolutions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getResolutions" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/bettors/&lt;bettor_id&gt;/resolutions</span></code></p>
+<ul>
+<li><dl class="first docutils">
+<dt>path-params:</dt>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt>bettor_id:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name or id</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>query-params:</dt>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt>bettingMarketGroup:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: betting market group id</li>
+<li>required: False</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;block_num&quot;</span><span class="p">:</span> <span class="mi">1046928</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.11.13588&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">64</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1500&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fees_paid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nt">&quot;resolutions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">[</span>
+                        <span class="s2">&quot;1.21.3130&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;win&quot;</span>
+                    <span class="p">],</span>
+                    <span class="p">[</span>
+                        <span class="s2">&quot;1.21.3131&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;not_win&quot;</span>
+                    <span class="p">]</span>
+                <span class="p">],</span>
+                <span class="nt">&quot;winnings&quot;</span><span class="p">:</span> <span class="mi">1495318</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;op_in_trx&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="p">{}</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;trx_in_block&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nt">&quot;virtual_op&quot;</span><span class="p">:</span> <span class="mi">33813</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
 <dt id="qaapi.getRules">
 <code class="descclassname">qaapi.</code><code class="descname">getRules</code><span class="sig-paren">(</span><em>rules_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getRules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getRules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/rules/&lt;rules_id&gt;</span></code></p>
@@ -1197,6 +1290,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: account name or account id</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
@@ -1274,6 +1368,7 @@
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: account name or account id</li>
+<li>required: True</li>
 </ul>
 </dd>
 </dl>
