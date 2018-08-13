@@ -1,0 +1,108 @@
+debug: False
+
+project_name: MINT
+project_sub_name: The BOS Manual Intervention Module
+secret_key: THINK CLOCK SMOG FLAG SMACK TINKER FLUNK # enter any random string 
+
+sql_database: "sqlite:////home/ubuntu/bos-mint/bookied-local.db"
+
+connection:
+    use: elizabeth
+
+    baxter:
+        node:
+            - # enter your node
+        nobroadcast: False
+        num_retries: 1
+
+    elizabeth:
+        node:
+            - ws://ec2-35-182-42-231.ca-central-1.compute.amazonaws.com:8090
+        account: init0
+        keys:
+            - 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
+            - 5KT58xismnQMGJjfxtkNtF5NzzmNxjQ7wLMgXddtzWY3PPjW656
+            - 5KcxKK2Js2L2JFE6VgKuWMXUhJZQu8rfVnQM3RXvqxwvTKHCV9g
+            - 5KQFHTVHuRNCiss5GX5EsCuXH5ctdC8RP13HZryShUT4PVHaUaw
+            - 5JcEg5M167yX8qsWaswutfvuraxMjap9MfnnpJ9XX2BTgB3x6SY
+        nobroadcast: False
+        num_retries: 1
+
+node: ws://ec2-35-182-42-231.ca-central-1.compute.amazonaws.com:8090
+network: elizabeth
+nobroadcast: False
+passphrase: peerplays**
+api_whitelist:
+    - 0.0.0.0
+    - localhost
+BOOKIE_PROPOSER: init0
+BOOKIE_APPROVER: init0
+
+allowed_assets:
+    - BTF
+    - BTC
+    - PPY
+    - BTCTEST
+
+allowed_transitions:
+    EventStatus:
+        create:
+            - upcoming
+        upcoming:
+            - in_progress
+            - finished
+            - frozen
+            - canceled
+        in_progress:
+            - finished
+            - frozen
+            - canceled
+        finished:
+            - canceled
+        frozen:
+            - upcoming
+            - in_progress
+            - frozen
+            - canceled
+            - finished
+    BettingMarketGroupStatus:
+        create:
+            - upcoming
+        upcoming:
+            - closed
+            - canceled
+            - in_play
+            - frozen
+        in_play:
+            - frozen
+            - closed
+            - canceled
+        closed:
+            - graded
+            - canceled
+        graded:
+            - re_grading
+            - settled
+            - canceled
+        re_grading:
+            - graded
+            - canceled
+    BettingMarketStatus:
+        create:
+            - unresolved
+        unresolved:
+            - win
+            - not_win
+            - canceled
+            - frozen
+        frozen:
+            - unresolved
+            - win
+            - not_win
+            - canceled
+        win:
+            - not_win
+            - canceled
+        not_win:
+            - canceled
+            - win

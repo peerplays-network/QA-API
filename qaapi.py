@@ -2,12 +2,14 @@ import json
 import yaml
 from flask import Flask
 from flask import request
+from flask import make_response
 import requests
 from flask import redirect
 from flask import jsonify
 from peerplays import PeerPlays
 from peerplaysbase import operations
 from peerplays.amount import Amount
+import mint
 
 app = Flask(__name__)
 
@@ -830,9 +832,156 @@ def getRules(rules_id):
 
 @app.route("/sports", methods=['POST'])
 def createSport():
-	print("Hi")
-	response = requests.post(market_maker_url + request.full_path, json = request.get_json())
-	return (response.content, response.status_code, response.headers.items())
+	try:
+		body = request.get_json()
+		name = body['name']
+		return jsonify(mint.createSport(name))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/sports", methods=['PUT'])
+def updateSport():
+	try:
+		body = request.get_json()
+		sport_id = body['sport_id']
+		name = body['name']
+		return jsonify(mint.updateSport(sport_id, name))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/eventGroups", methods=['POST'])
+def createEventGroup():
+	try:
+		body = request.get_json()
+		name = body['name']
+		sport_id = body['sport_id']
+		return jsonify(mint.createEventGroup(name, sport_id))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/eventGroups", methods=['PUT'])
+def updateEventGroup():
+	try:
+		body = request.get_json()
+		event_group_id = body['event_group_id']
+		name = body['name']
+		sport_id = body['sport_id']
+		return jsonify(mint.updateEventGroup(event_group_id, name, sport_id))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/events", methods=['POST'])
+def createEvent():
+	try:
+		body = request.get_json()
+		name = body['name']
+		season = body['season']
+		start_time = body['start_time']
+		event_group_id = body['event_group_id']
+		return jsonify(mint.createEvent(name, season, start_time, event_group_id))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/events", methods=['PUT'])
+def updateEvent():
+	try:
+		body = request.get_json()
+		event_id = body['event_id']
+		name = body['name']
+		season = body['season']
+		start_time = body['start_time']
+		event_group_id = body['event_group_id']
+		status = body['status']
+		return jsonify(mint.updateEvent(event_id, name, season, start_time, event_group_id, status))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/events/status", methods=['PUT'])
+def updateEventStatus():
+	try:
+		body = request.get_json()
+		event_id = body['event_id']
+		status = body['status']
+		scores = body['scores']
+		return jsonify(mint.updateEventStatus(event_id, status, scores))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/bettingMarketGroups", methods=['POST'])
+def createBettingMarketGroup():
+	try:
+		body = request.get_json()
+		description = body['description']
+		event_id = body['event_id']
+		betting_market_rule_id = body['betting_market_rule_id']
+		asset = body['asset']
+		return jsonify(mint.createBettingMarketGroup(description, event_id, betting_market_rule_id, asset))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/bettingMarketGroups", methods=['PUT'])
+def updateBettingMarketGroup():
+	try:
+		body = request.get_json()
+		bmg_id = body['bmg_id']
+		description = body['description']
+		event_id = body['event_id']
+		betting_market_rule_id = body['betting_market_rule_id']
+		status = body['status']
+		return jsonify(mint.updateBettingMarketGroup(bmg_id, description, event_id, rules_id, status))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/bettingMarketGroups/rules", methods=['PUT'])
+def updateBettingMarketGroupRule():
+	try:
+		body = request.get_json()
+		bmg_id = body['bmg_id']
+		name = body['name']
+		description = body['description']
+		return jsonify(mint.updateBettingMarketGroupRule(bmg_id, name, description))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/bettingMarkets", methods=['POST'])
+def createBettingMarket():
+	try:
+		body = request.get_json()
+		payout_condition = body['payout_condition']
+		description = body['description']
+		betting_market_group_id = body['betting_market_group_id']
+		return jsonify(mint.createBettingMarket(payout_condition, description, betting_market_group_id))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/bettingMarkets", methods=['PUT'])
+def updateBettingMarket():
+	try:
+		body = request.get_json()
+		betting_market_id = body['betting_market_id']
+		payout_condition = body['payout_condition']
+		description = body['description']
+		betting_market_group_id = body['betting_market_group_id']
+		return jsonify(mint.updateBettingMarket(betting_market_id, payout_condition, description, betting_market_group_id))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/proposals", methods=['GET'])
+def getProposals():
+	try:
+		return jsonify(mint.getProposals())
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
+@app.route("/proposals/<proposal_id>", methods=['PUT'])
+def approveProposal(proposal_id):
+	try:
+		approve = request.args.get("approve")
+		if approve is None:
+			return make_response(jsonify(error="Specify approve in query params"), 500)
+		return jsonify(mint.approveProposal(proposal_id, approve))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
 
 # Other Calls
 
