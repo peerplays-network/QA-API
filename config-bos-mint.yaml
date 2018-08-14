@@ -9,12 +9,6 @@ sql_database: "sqlite:////home/ubuntu/bos-mint/bookied-local.db"
 connection:
     use: elizabeth
 
-    baxter:
-        node:
-            - # enter your node
-        nobroadcast: False
-        num_retries: 1
-
     elizabeth:
         node:
             - ws://ec2-35-182-42-231.ca-central-1.compute.amazonaws.com:8090
@@ -27,16 +21,12 @@ connection:
             - 5JcEg5M167yX8qsWaswutfvuraxMjap9MfnnpJ9XX2BTgB3x6SY
         nobroadcast: False
         num_retries: 1
-
-node: ws://ec2-35-182-42-231.ca-central-1.compute.amazonaws.com:8090
-network: elizabeth
-nobroadcast: False
-passphrase: peerplays**
-api_whitelist:
-    - 0.0.0.0
-    - localhost
-BOOKIE_PROPOSER: init0
-BOOKIE_APPROVER: init0
+        passphrase: peerplays**
+        api_whitelist:
+            - 0.0.0.0
+            - localhost
+        BOOKIE_PROPOSER: init0
+        BOOKIE_APPROVER: init0
 
 allowed_assets:
     - BTF

@@ -3,6 +3,7 @@ from flask import jsonify
 from bos_mint.node import Node
 
 # MINT calls
+# TODO add account param for bookie object creation/update proposals
 
 def createSport(name):
 	Node().createSport(name)
@@ -14,7 +15,6 @@ def updateSport(sportId, name):
 
 def createEventGroup(name, sportId):
 	Node().createEventGroup(name, sportId)
-	print("AFTER")
 	return Node().broadcastPendingTransaction()
 
 def updateEventGroup(eventGroupId, name, sportId):
@@ -30,7 +30,7 @@ def updateEvent(eventId, name, season, startTime, eventGroupId, status):
 	return Node().broadcastPendingTransaction()
 
 def updateEventStatus(eventId, status, scores=[]):
-	Node().updateBettingMarketGroup(eventId, status, scores=[])
+	Node().updateEventStatus(eventId, status, scores=[])
 	return Node().broadcastPendingTransaction()
 
 def createBettingMarketGroup(description, eventId, bettingMarketRuleId, asset):
@@ -41,8 +41,8 @@ def updateBettingMarketGroup(bmgId, description, eventId, rulesId, status):
 	Node().updateBettingMarketGroup(bmgId, description, eventId, rulesId, status)
 	return Node().broadcastPendingTransaction()
 
-def updateBettingMarketGroupRule(bmgId, name, description):
-	Node().updateBettingMarketGroupRule(bmgId, name, description)
+def updateBettingMarketGroupRule(bmgrId, name, description):
+	Node().updateBettingMarketGroupRule(bmgrId, name, description)
 	return Node().broadcastPendingTransaction()
 
 def createBettingMarket(payoutCondition, description, bettingMarketGroupId):
@@ -53,24 +53,15 @@ def updateBettingMarket(bmId, payout_condition, description, bmgId):
 	Node().updateBettingMarket(bmId, payout_condition, description, bmgId)
 	return Node().broadcastPendingTransaction()
 
-def freezeBettingMarketGroup(bmgId):
-	Node().freezeBettingMarketGroup(bmgId)
-	return Node().broadcastPendingTransaction()
-
-def unfreezeBettingMarketGroup(bmgId):
-	Node().unfreezeBettingMarketGroup(bmgId)
-	return Node().broadcastPendingTransaction()
-
-def cancelBettingMarketGroup(bmgId):
-	Node().cancelBettingMarketGroup(bmgId)
-	return Node().broadcastPendingTransaction()
-
 def resolveBettingMarketGroup(bettingMarketGroupId, resultList):
 	Node().resolveBettingMarketGroup(bettingMarketGroupId, resultList)
 	return Node().broadcastPendingTransaction()
 
-def getProposals():
-	return Node().getAllProposals()
+def getProposals(account=None):
+	if account is None:
+		return Node().getAllProposals()
+	else:
+		return Node().getAllProposals(accountName=account)
 
 def approveProposal(proposal_id, approve):
 	if approve is True:

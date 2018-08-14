@@ -6,6 +6,7 @@ from flask import make_response
 import requests
 from flask import redirect
 from flask import jsonify
+from datetime import datetime
 from peerplays import PeerPlays
 from peerplaysbase import operations
 from peerplays.amount import Amount
@@ -291,7 +292,6 @@ def getSport(sport_id):
 		    }	
 
 	"""
-	print("Hellu")
 	response = requests.get(market_maker_url + request.full_path)
 	return (response.content, response.status_code, response.headers.items())
 
@@ -832,6 +832,69 @@ def getRules(rules_id):
 
 @app.route("/sports", methods=['POST'])
 def createSport():
+	"""
+	**POST** ``/sports``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"name": [["en", "Michael Sport"], ["de", "Michael Spoort"]]
+		}
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T03:25:59",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T03:25:29",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            52,
+			                            {
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "name": [
+			                                    [
+			                                        "de",
+			                                        "Michael Spoort"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Michael Sport"
+			                                    ]
+			                                ]
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 24645,
+			    "ref_block_prefix": 3184223600,
+			    "signatures": [
+			        "1f57acd0862ad0ecfa7d6ca5f7857a803af725b92e325af9aab5e0ea118fa0174d2f9a61646d914f6543d530446d798af12675e04ab81c0db8ea351eda0b80ee96"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		name = body['name']
@@ -841,6 +904,71 @@ def createSport():
 
 @app.route("/sports", methods=['PUT'])
 def updateSport():
+	"""
+	**PUT** ``/sports``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"name": [["en", "Michael Sport"], ["de", "Michael Sporte"]],
+			"sport_id": "1.16.9"
+		}
+
+	* returns:
+		+ 200:
+		.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T03:50:00",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T03:49:30",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            53,
+			                            {
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "new_name": [
+			                                    [
+			                                        "de",
+			                                        "Michael Sporte"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Michael Sport"
+			                                    ]
+			                                ],
+			                                "sport_id": "1.16.9"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 25111,
+			    "ref_block_prefix": 2306565201,
+			    "signatures": [
+			        "202260fd3551a76d9ceba1ed9c5a6aab080365de67b5282bf9e74ea461875ae2e362f91d2441f4c7000862ceb8005169bcf2605f0b63893721ee7f7a7dadf6b013"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		sport_id = body['sport_id']
@@ -851,6 +979,69 @@ def updateSport():
 
 @app.route("/eventGroups", methods=['POST'])
 def createEventGroup():
+	"""
+	**POST** ``/eventGroups``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"name": [["en", "Michael Group"], ["de", "Michael Group"]],
+			"sport_id": "1.16.9"
+		}
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+			{
+			    "expiration": "2018-08-14T02:39:53",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T02:39:23",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            54,
+			                            {
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "name": [
+			                                    [
+			                                        "de",
+			                                        "Michael Group"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Michael Group"
+			                                    ]
+			                                ],
+			                                "sport_id": "1.16.9"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 23750,
+			    "ref_block_prefix": 3528624841,
+			    "signatures": [
+			        "1f428671ece4d4966987c7ec2ec9b6f4702c07ab2a728e25a54ab06b933d6438021af30a07d88f23a579abc6957ffc13466db9916889fbbfb81b2a51a31763bdde"
+			    ]
+			} 
+	"""
 	try:
 		body = request.get_json()
 		name = body['name']
@@ -861,6 +1052,73 @@ def createEventGroup():
 
 @app.route("/eventGroups", methods=['PUT'])
 def updateEventGroup():
+	"""
+	**PUT** ``/eventGroups``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"name": [["en", "Michael Group"], ["de", "Michael Group"]],
+			"sport_id": "1.16.4",
+			"event_group_id": "1.17.17"
+		}
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T03:55:25",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T03:54:54",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            55,
+			                            {
+			                                "event_group_id": "1.17.17",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "new_name": [
+			                                    [
+			                                        "de",
+			                                        "Michael Groupe"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Michael Group"
+			                                    ]
+			                                ],
+			                                "new_sport_id": "1.16.4"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 25216,
+			    "ref_block_prefix": 920330615,
+			    "signatures": [
+			        "2059282a31f9670b250e2e3fa26782758992c92ea835a5c6d2c904836c791a2e5052ec6f1d2166f6bdefb97bfee6a7f438db8dc0caaec1e403bf263ccaabd934a6"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		event_group_id = body['event_group_id']
@@ -872,32 +1130,257 @@ def updateEventGroup():
 
 @app.route("/events", methods=['POST'])
 def createEvent():
+	"""
+	**POST** ``/events``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"name": [["en", "Michael Event"], ["de", "Michael Evante"]],
+			"season": [["en", "2018"], ["de", "2018"]],
+			"start_time": "2018-08-17T21:08:47",
+			"event_group_id": "1.17.17"
+		}
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T04:15:41",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T04:15:11",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            56,
+			                            {
+			                                "event_group_id": "1.17.17",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "name": [
+			                                    [
+			                                        "de",
+			                                        "Michael Evante"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Michael Event"
+			                                    ]
+			                                ],
+			                                "season": [
+			                                    [
+			                                        "de",
+			                                        "2018"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "2018"
+			                                    ]
+			                                ],
+			                                "start_time": "2018-08-17T21:08:47"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 25609,
+			    "ref_block_prefix": 2528423905,
+			    "signatures": [
+			        "201227d4498aaac9e27fb43c2df83f455aee4f4c774f178574d4907874f6d3222b4eefe7a6aae14c2e7aa683223e6b6ad3a7d0b634d304820c40f94df4a50df509"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		name = body['name']
 		season = body['season']
 		start_time = body['start_time']
+		start_time_format = datetime.strptime(start_time,'%Y-%m-%dT%H:%M:%S')
 		event_group_id = body['event_group_id']
-		return jsonify(mint.createEvent(name, season, start_time, event_group_id))
+		return jsonify(mint.createEvent(name, season, start_time_format, event_group_id))
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
 @app.route("/events", methods=['PUT'])
 def updateEvent():
+	"""
+	**PUT** ``/events``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"name": [["en", "Michael Event"], ["de", "Michael Evante"]],
+			"season": [["en", "2018"], ["de", "2018"]],
+			"start_time": "2018-08-18T21:08:47",
+			"event_group_id": "1.17.13",
+			"event_id": "1.18.59",
+			"status": "frozen"
+		}
+
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T04:30:25",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T04:29:55",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            57,
+			                            {
+			                                "event_id": "1.18.59",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "new_event_group_id": "1.17.13",
+			                                "new_name": [
+			                                    [
+			                                        "de",
+			                                        "Michael Evante"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Michael Event"
+			                                    ]
+			                                ],
+			                                "new_season": [
+			                                    [
+			                                        "de",
+			                                        "2018"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "2018"
+			                                    ]
+			                                ],
+			                                "new_start_time": "2018-08-18T21:08:47",
+			                                "new_status": "frozen"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 25895,
+			    "ref_block_prefix": 2859863074,
+			    "signatures": [
+			        "207d9e5a8ff3f9d79eded681f3737779de689560283020fb06ee22a6cd263bd06f4cc1aa47adc5361c413f2872fcd6d0aa982b7b3eeba1ddc601f0c594acd2a405"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		event_id = body['event_id']
 		name = body['name']
 		season = body['season']
 		start_time = body['start_time']
+		start_time_format = datetime.strptime(start_time,'%Y-%m-%dT%H:%M:%S')
 		event_group_id = body['event_group_id']
 		status = body['status']
-		return jsonify(mint.updateEvent(event_id, name, season, start_time, event_group_id, status))
+		return jsonify(mint.updateEvent(event_id, name, season, start_time_format, event_group_id, status))
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
 @app.route("/events/status", methods=['PUT'])
 def updateEventStatus():
+	"""
+	**PUT** ``/events/status``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"scores": [["en", "1-0"], ["de", "1-0"]],
+			"event_id": "1.18.59",
+			"status": "frozen"
+		}
+
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T04:28:32",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T04:28:02",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            72,
+			                            {
+			                                "event_id": "1.18.59",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "scores": [],
+			                                "status": "frozen"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 25857,
+			    "ref_block_prefix": 1565774390,
+			    "signatures": [
+			        "1f5fff23560217af19025c4092ee74175608adb8991f06187f3a0df2d4fc8e0ded00a7af2c26504711d91ca2b8d23010dea19247bd1d54dc31c5af9d63bccb9bdd"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		event_id = body['event_id']
@@ -909,6 +1392,80 @@ def updateEventStatus():
 
 @app.route("/bettingMarketGroups", methods=['POST'])
 def createBettingMarketGroup():
+	"""
+	**POST** ``/bettingMarketGroups``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"description": [["en","Moneyline"],["de", "Moneeline"]],
+			"event_id": "1.18.404",
+			"betting_market_rule_id": "1.19.0",
+			"asset": "1.3.1"
+		}
+
+
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T05:10:40",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T05:10:10",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            60,
+			                            {
+			                                "asset_id": "1.3.1",
+			                                "delay_before_settling": 0,
+			                                "description": [
+			                                    [
+			                                        "de",
+			                                        "Moneeline"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Moneyline"
+			                                    ]
+			                                ],
+			                                "event_id": "1.18.404",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "never_in_play": false,
+			                                "rules_id": "1.19.0"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 26676,
+			    "ref_block_prefix": 954659182,
+			    "signatures": [
+			        "2065e0341ff57d96b3ec2e4df6ed461b46dea6e0f295556302d526f2561cfd73a72b47963658fe7dbb7a2db71c4d48e53ec1e0aaa0cd2cbd3789e76b9ba007719d"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		description = body['description']
@@ -921,30 +1478,256 @@ def createBettingMarketGroup():
 
 @app.route("/bettingMarketGroups", methods=['PUT'])
 def updateBettingMarketGroup():
+	"""
+	**PUT** ``/bettingMarketGroups``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"description": [["en","Moneyline"],["de", "Monexline"]],
+			"event_id": "1.18.59",
+			"betting_market_group_id": "1.20.418",
+			"betting_market_rule_id": "1.19.8",
+			"status": "upcoming"
+		}
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T05:11:30",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T05:11:00",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            70,
+			                            {
+			                                "betting_market_group_id": "1.20.418",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "new_description": [
+			                                    [
+			                                        "de",
+			                                        "Monexline"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Moneyline"
+			                                    ]
+			                                ],
+			                                "new_rules_id": "1.19.8",
+			                                "status": "upcoming"
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 26693,
+			    "ref_block_prefix": 1054910509,
+			    "signatures": [
+			        "206b94d167a14bb7972d1084061fd5a9ff882643f28bf9e4d7febc7efbdf0ff32b5811a95fe54d49e06aaaf968d5b415bed9bfde4c1f3f0d6772171420c7725795"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
-		bmg_id = body['bmg_id']
+		bmg_id = body['betting_market_group_id']
 		description = body['description']
 		event_id = body['event_id']
 		betting_market_rule_id = body['betting_market_rule_id']
 		status = body['status']
-		return jsonify(mint.updateBettingMarketGroup(bmg_id, description, event_id, rules_id, status))
+		return jsonify(mint.updateBettingMarketGroup(bmg_id, description, event_id, betting_market_rule_id, status))
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
 @app.route("/bettingMarketGroups/rules", methods=['PUT'])
 def updateBettingMarketGroupRule():
+	"""
+	**PUT** ``/bettingMarketGroups/rules``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"description": [["en","Big rule"],["de", "Bige Rule"]],
+			"betting_market_rule_id": "1.19.8",
+			"name": [["en", "MLB_2018"], ["de", "LMB_2018"]]
+		}
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T04:56:54",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T04:56:24",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            59,
+			                            {
+			                                "betting_market_rules_id": "1.19.8",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "new_description": [
+			                                    [
+			                                        "de",
+			                                        "Bige Rule"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Big rule"
+			                                    ]
+			                                ],
+			                                "new_name": [
+			                                    [
+			                                        "de",
+			                                        "LMB_2018"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "MLB_2018"
+			                                    ]
+			                                ]
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 26410,
+			    "ref_block_prefix": 419842553,
+			    "signatures": [
+			        "2065c3b58af4444302baed030d16e8dc0ad0146301cc39b6bc132295adf5c606b53ec950628fc91ff524344a315d9af7a29e3ce03176e1eb929a7f8e087b503a74"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
-		bmg_id = body['bmg_id']
+		bmgr_id = body['betting_market_rule_id']
 		name = body['name']
 		description = body['description']
-		return jsonify(mint.updateBettingMarketGroupRule(bmg_id, name, description))
+		return jsonify(mint.updateBettingMarketGroupRule(bmgr_id, name, description))
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
 @app.route("/bettingMarkets", methods=['POST'])
 def createBettingMarket():
+	"""
+	**POST** ``/bettingMarkets``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"payout_condition": [["en","Team must satisfy bmg rules"],["de", "German stuff"]],
+			"betting_market_group_id": "1.20.417",
+			"description": [["en", "New York Yankees"], ["de", "New Yirk Yonkees"]]
+		}
+
+
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T05:01:16",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T05:00:46",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000001,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            61,
+			                            {
+			                                "description": [
+			                                    [
+			                                        "de",
+			                                        "New Yirk Yonkees"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "New York Yankees"
+			                                    ]
+			                                ],
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "group_id": "1.20.417",
+			                                "payout_condition": [
+			                                    [
+			                                        "de",
+			                                        "German stuff"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Team must satisfy bmg rules"
+			                                    ]
+			                                ]
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 26494,
+			    "ref_block_prefix": 750610868,
+			    "signatures": [
+			        "2021226fc1fd7fdc73ce87edabf6cd41576722b968070f28b6c9282ba8dadffd3a422c383d6fa64fc2e6fe6c7582fec7773167173f1828c84a9a039d00fbedc732"
+			    ]
+			}
+
+	"""
 	try:
 		body = request.get_json()
 		payout_condition = body['payout_condition']
@@ -956,6 +1739,87 @@ def createBettingMarket():
 
 @app.route("/bettingMarkets", methods=['PUT'])
 def updateBettingMarket():
+	"""
+	**PUT** ``/bettingMarkets``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"payout_condition": [["en","Team must satisfy bmg rules"],["de", "German stuff"]],
+			"betting_market_group_id": "1.20.417",
+			"description": [["en", "New York Yankees"], ["de", "New Yirk Yonkees"]],
+			"betting_market_id": "1.21.883"
+		}
+
+
+
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T05:03:34",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T05:03:04",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000001,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            71,
+			                            {
+			                                "betting_market_id": "1.21.883",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "new_description": [
+			                                    [
+			                                        "de",
+			                                        "New Yirk Yonkees"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "New York Yankees"
+			                                    ]
+			                                ],
+			                                "new_group_id": "1.20.417",
+			                                "new_payout_condition": [
+			                                    [
+			                                        "de",
+			                                        "German stuff"
+			                                    ],
+			                                    [
+			                                        "en",
+			                                        "Team must satisfy bmg rules"
+			                                    ]
+			                                ]
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 26537,
+			    "ref_block_prefix": 1019350048,
+			    "signatures": [
+			        "1f362fb8f03fcca714c6b060cc554d6c31d0224540cfa651211858f32f9353079c24e4b270fbbd9d8697d4c10eede81becab06cc35639358d92e5ab05a5b476219"
+			    ]
+			}
+	"""
 	try:
 		body = request.get_json()
 		betting_market_id = body['betting_market_id']
@@ -966,17 +1830,263 @@ def updateBettingMarket():
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
+@app.route("/bettingMarkets/<betting_market_id>/resolve", methods=['PUT'])
+def resolveBettingMarkets(betting_market_id):
+	"""
+	**PUT** ``/bettingMarkets``
+
+	* body:
+	.. code-block:: json
+
+		{
+			"result_list": [["1.21.833","win"],["1.21.822", "not_win"]],
+			"betting_market_group_id": "1.20.417"
+		}
+
+
+
+
+
+	* returns:
+	  	+ 200:
+	  	.. code-block:: json
+
+			{
+			    "expiration": "2018-08-14T05:07:07",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            22,
+			            {
+			                "expiration_time": "2018-08-15T05:06:37",
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "proposed_ops": [
+			                    {
+			                        "op": [
+			                            63,
+			                            {
+			                                "betting_market_group_id": "1.20.417",
+			                                "extensions": [],
+			                                "fee": {
+			                                    "amount": 0,
+			                                    "asset_id": "1.3.0"
+			                                },
+			                                "resolutions": [
+			                                    [
+			                                        "1.21.822",
+			                                        "not_win"
+			                                    ],
+			                                    [
+			                                        "1.21.833",
+			                                        "win"
+			                                    ]
+			                                ]
+			                            }
+			                        ]
+			                    }
+			                ]
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 26608,
+			    "ref_block_prefix": 3916725088,
+			    "signatures": [
+			        "207a7bfe7b16341167b639f153b7f0c0b7bab8be8c4b3602d3b002a2fd1794903b4a0723c71c7c729782020bcab78546883a37edbb251b65aeb8cfc2f863f293f9"
+			    ]
+			}
+	"""
+	try:
+		body = request.get_json()
+		result_list = body['result_list']
+		betting_market_group_id = body['betting_market_group_id']
+		return jsonify(mint.resolveBettingMarketGroup(betting_market_group_id, result_list))
+	except Exception as e:
+		return make_response(jsonify(error=str(e)), 500)
+
 @app.route("/proposals", methods=['GET'])
 def getProposals():
+	"""
+	**GET** ``/proposals``
+
+	* query-params:
+		+ account:
+			- type: string
+			- description: account name or id
+
+	* returns:
+		+ 200:
+		.. code-block: json
+			[
+			    {
+			        "available_active_approvals": [],
+			        "available_key_approvals": [],
+			        "available_owner_approvals": [],
+			        "expiration_time": "2018-08-15T02:39:23",
+			        "id": "1.10.2020",
+			        "proposed_transaction": {
+			            "expiration": "2018-08-15T02:39:23",
+			            "extensions": [],
+			            "operations": [
+			                [
+			                    54,
+			                    {
+			                        "extensions": [],
+			                        "fee": {
+			                            "amount": 0,
+			                            "asset_id": "1.3.0"
+			                        },
+			                        "name": [
+			                            [
+			                                "[",
+			                                "'"
+			                            ]
+			                        ],
+			                        "sport_id": "1.16.9"
+			                    }
+			                ]
+			            ],
+			            "ref_block_num": 0,
+			            "ref_block_prefix": 0
+			        },
+			        "proposer": "1.2.7",
+			        "required_active_approvals": [
+			            "1.2.1"
+			        ],
+			        "required_owner_approvals": []
+			    },
+			    {
+			        "available_active_approvals": [
+			            "1.2.7"
+			        ],
+			        "available_key_approvals": [],
+			        "available_owner_approvals": [],
+			        "expiration_time": "2018-08-14T03:42:00",
+			        "id": "1.10.2022",
+			        "proposed_transaction": {
+			            "expiration": "2018-08-14T03:42:00",
+			            "extensions": [],
+			            "operations": [
+			                [
+			                    63,
+			                    {
+			                        "betting_market_group_id": "1.20.2109",
+			                        "extensions": [],
+			                        "fee": {
+			                            "amount": 0,
+			                            "asset_id": "1.3.0"
+			                        },
+			                        "resolutions": [
+			                            [
+			                                "1.21.4374",
+			                                "not_win"
+			                            ],
+			                            [
+			                                "1.21.4375",
+			                                "win"
+			                            ]
+			                        ]
+			                    }
+			                ],
+			                [
+			                    63,
+			                    {
+			                        "betting_market_group_id": "1.20.2161",
+			                        "extensions": [],
+			                        "fee": {
+			                            "amount": 0,
+			                            "asset_id": "1.3.0"
+			                        },
+			                        "resolutions": [
+			                            [
+			                                "1.21.4484",
+			                                "not_win"
+			                            ],
+			                            [
+			                                "1.21.4485",
+			                                "win"
+			                            ]
+			                        ]
+			                    }
+			                ]
+			            ],
+			            "ref_block_num": 0,
+			            "ref_block_prefix": 0
+			        },
+			        "proposer": "1.2.7",
+			        "required_active_approvals": [
+			            "1.2.1"
+			        ],
+			        "required_owner_approvals": []
+			    }
+			]
+	"""
 	try:
-		return jsonify(mint.getProposals())
+		account = request.args.get("account")
+		return jsonify(mint.getProposals(account))
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
 @app.route("/proposals/<proposal_id>", methods=['PUT'])
 def approveProposal(proposal_id):
+	"""
+	**PUT** ``/proposals/<proposal_id>
+
+	* path-params:
+		+ proposal_id:
+			- type: string
+			- description: proposal id
+
+	* query-params:
+		+ approve:
+			- type: Boolean
+			- description: approve or disapprove proposal
+		+ account:
+			- type: string
+			- description: account name or id
+
+	* returns:
+		+ 200:
+		.. code-block: json
+			{
+			    "expiration": "2018-08-14T03:02:53",
+			    "extensions": [],
+			    "operations": [
+			        [
+			            23,
+			            {
+			                "active_approvals_to_add": [],
+			                "active_approvals_to_remove": [
+			                    "1.2.7"
+			                ],
+			                "extensions": [],
+			                "fee": {
+			                    "amount": 2000000,
+			                    "asset_id": "1.3.0"
+			                },
+			                "fee_paying_account": "1.2.7",
+			                "key_approvals_to_add": [],
+			                "key_approvals_to_remove": [],
+			                "owner_approvals_to_add": [],
+			                "owner_approvals_to_remove": [],
+			                "proposal": "1.10.2020"
+			            }
+			        ]
+			    ],
+			    "ref_block_num": 24195,
+			    "ref_block_prefix": 1095264235,
+			    "signatures": [
+			        "1f62b9e802ebbe616d4fabbf43f2f54a1ee772eda52c924cd41d2b15e87d82cae922304b54f7662d628cf47852119082202592f4810468d9938cd80b1c7eca02a6"
+			    ]
+			}
+	"""
 	try:
 		approve = request.args.get("approve")
+		account = request.args.get("account")
 		if approve is None:
 			return make_response(jsonify(error="Specify approve in query params"), 500)
 		return jsonify(mint.approveProposal(proposal_id, approve))
