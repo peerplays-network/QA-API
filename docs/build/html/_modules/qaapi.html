@@ -36,12 +36,15 @@
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">make_response</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">redirect</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">peerplays</span> <span class="k">import</span> <span class="n">PeerPlays</span>
 <span class="kn">from</span> <span class="nn">peerplaysbase</span> <span class="k">import</span> <span class="n">operations</span>
 <span class="kn">from</span> <span class="nn">peerplays.amount</span> <span class="k">import</span> <span class="n">Amount</span>
+<span class="kn">import</span> <span class="nn">mint</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -858,6 +861,1271 @@
 <span class="sd">	&quot;&quot;&quot;</span>
 	<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">market_maker_url</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">full_path</span><span class="p">)</span>
 	<span class="k">return</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+
+<span class="c1"># MINT Calls</span>
+
+<div class="viewcode-block" id="createSport"><a class="viewcode-back" href="../qaapi.html#qaapi.createSport">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/sports&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">createSport</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**POST** ``/sports``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;Michael Sport&quot;], [&quot;de&quot;, &quot;Michael Spoort&quot;]]</span>
+<span class="sd">		}</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T03:25:59&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T03:25:29&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            52,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Michael Spoort&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Michael Sport&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ]</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 24645,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 3184223600,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;1f57acd0862ad0ecfa7d6ca5f7857a803af725b92e325af9aab5e0ea118fa0174d2f9a61646d914f6543d530446d798af12675e04ab81c0db8ea351eda0b80ee96&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">createSport</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateSport"><a class="viewcode-back" href="../qaapi.html#qaapi.updateSport">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/sports&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateSport</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/sports``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;Michael Sport&quot;], [&quot;de&quot;, &quot;Michael Sporte&quot;]],</span>
+<span class="sd">			&quot;sport_id&quot;: &quot;1.16.9&quot;</span>
+<span class="sd">		}</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T03:50:00&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T03:49:30&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            53,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;new_name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Michael Sporte&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Michael Sport&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;sport_id&quot;: &quot;1.16.9&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 25111,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 2306565201,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;202260fd3551a76d9ceba1ed9c5a6aab080365de67b5282bf9e74ea461875ae2e362f91d2441f4c7000862ceb8005169bcf2605f0b63893721ee7f7a7dadf6b013&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">sport_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;sport_id&#39;</span><span class="p">]</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateSport</span><span class="p">(</span><span class="n">sport_id</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="createEventGroup"><a class="viewcode-back" href="../qaapi.html#qaapi.createEventGroup">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/eventGroups&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">createEventGroup</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**POST** ``/eventGroups``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;Michael Group&quot;], [&quot;de&quot;, &quot;Michael Group&quot;]],</span>
+<span class="sd">			&quot;sport_id&quot;: &quot;1.16.9&quot;</span>
+<span class="sd">		}</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T02:39:53&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T02:39:23&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            54,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Michael Group&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Michael Group&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;sport_id&quot;: &quot;1.16.9&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 23750,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 3528624841,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;1f428671ece4d4966987c7ec2ec9b6f4702c07ab2a728e25a54ab06b933d6438021af30a07d88f23a579abc6957ffc13466db9916889fbbfb81b2a51a31763bdde&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			} </span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="n">sport_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;sport_id&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">createEventGroup</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">sport_id</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateEventGroup"><a class="viewcode-back" href="../qaapi.html#qaapi.updateEventGroup">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/eventGroups&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateEventGroup</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/eventGroups``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;Michael Group&quot;], [&quot;de&quot;, &quot;Michael Group&quot;]],</span>
+<span class="sd">			&quot;sport_id&quot;: &quot;1.16.4&quot;,</span>
+<span class="sd">			&quot;event_group_id&quot;: &quot;1.17.17&quot;</span>
+<span class="sd">		}</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T03:55:25&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T03:54:54&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            55,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;event_group_id&quot;: &quot;1.17.17&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;new_name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Michael Groupe&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Michael Group&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;new_sport_id&quot;: &quot;1.16.4&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 25216,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 920330615,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;2059282a31f9670b250e2e3fa26782758992c92ea835a5c6d2c904836c791a2e5052ec6f1d2166f6bdefb97bfee6a7f438db8dc0caaec1e403bf263ccaabd934a6&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">event_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_group_id&#39;</span><span class="p">]</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="n">sport_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;sport_id&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateEventGroup</span><span class="p">(</span><span class="n">event_group_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">sport_id</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="createEvent"><a class="viewcode-back" href="../qaapi.html#qaapi.createEvent">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">createEvent</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**POST** ``/events``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;Michael Event&quot;], [&quot;de&quot;, &quot;Michael Evante&quot;]],</span>
+<span class="sd">			&quot;season&quot;: [[&quot;en&quot;, &quot;2018&quot;], [&quot;de&quot;, &quot;2018&quot;]],</span>
+<span class="sd">			&quot;start_time&quot;: &quot;2018-08-17T21:08:47&quot;,</span>
+<span class="sd">			&quot;event_group_id&quot;: &quot;1.17.17&quot;</span>
+<span class="sd">		}</span>
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T04:15:41&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T04:15:11&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            56,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;event_group_id&quot;: &quot;1.17.17&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Michael Evante&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Michael Event&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;season&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;2018&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;2018&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;start_time&quot;: &quot;2018-08-17T21:08:47&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 25609,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 2528423905,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;201227d4498aaac9e27fb43c2df83f455aee4f4c774f178574d4907874f6d3222b4eefe7a6aae14c2e7aa683223e6b6ad3a7d0b634d304820c40f94df4a50df509&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="n">season</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span>
+		<span class="n">start_time</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span>
+		<span class="n">start_time_format</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">)</span>
+		<span class="n">event_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_group_id&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">createEvent</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">season</span><span class="p">,</span> <span class="n">start_time_format</span><span class="p">,</span> <span class="n">event_group_id</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateEvent"><a class="viewcode-back" href="../qaapi.html#qaapi.updateEvent">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateEvent</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/events``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;Michael Event&quot;], [&quot;de&quot;, &quot;Michael Evante&quot;]],</span>
+<span class="sd">			&quot;season&quot;: [[&quot;en&quot;, &quot;2018&quot;], [&quot;de&quot;, &quot;2018&quot;]],</span>
+<span class="sd">			&quot;start_time&quot;: &quot;2018-08-18T21:08:47&quot;,</span>
+<span class="sd">			&quot;event_group_id&quot;: &quot;1.17.13&quot;,</span>
+<span class="sd">			&quot;event_id&quot;: &quot;1.18.59&quot;,</span>
+<span class="sd">			&quot;status&quot;: &quot;frozen&quot;</span>
+<span class="sd">		}</span>
+
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T04:30:25&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T04:29:55&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            57,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;event_id&quot;: &quot;1.18.59&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;new_event_group_id&quot;: &quot;1.17.13&quot;,</span>
+<span class="sd">			                                &quot;new_name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Michael Evante&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Michael Event&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;new_season&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;2018&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;2018&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;new_start_time&quot;: &quot;2018-08-18T21:08:47&quot;,</span>
+<span class="sd">			                                &quot;new_status&quot;: &quot;frozen&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 25895,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 2859863074,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;207d9e5a8ff3f9d79eded681f3737779de689560283020fb06ee22a6cd263bd06f4cc1aa47adc5361c413f2872fcd6d0aa982b7b3eeba1ddc601f0c594acd2a405&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">event_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_id&#39;</span><span class="p">]</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="n">season</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;season&#39;</span><span class="p">]</span>
+		<span class="n">start_time</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;start_time&#39;</span><span class="p">]</span>
+		<span class="n">start_time_format</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_time</span><span class="p">,</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">)</span>
+		<span class="n">event_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_group_id&#39;</span><span class="p">]</span>
+		<span class="n">status</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateEvent</span><span class="p">(</span><span class="n">event_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">season</span><span class="p">,</span> <span class="n">start_time_format</span><span class="p">,</span> <span class="n">event_group_id</span><span class="p">,</span> <span class="n">status</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateEventStatus"><a class="viewcode-back" href="../qaapi.html#qaapi.updateEventStatus">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/events/status&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateEventStatus</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/events/status``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;scores&quot;: [[&quot;en&quot;, &quot;1-0&quot;], [&quot;de&quot;, &quot;1-0&quot;]],</span>
+<span class="sd">			&quot;event_id&quot;: &quot;1.18.59&quot;,</span>
+<span class="sd">			&quot;status&quot;: &quot;frozen&quot;</span>
+<span class="sd">		}</span>
+
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T04:28:32&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T04:28:02&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            72,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;event_id&quot;: &quot;1.18.59&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;scores&quot;: [],</span>
+<span class="sd">			                                &quot;status&quot;: &quot;frozen&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 25857,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 1565774390,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;1f5fff23560217af19025c4092ee74175608adb8991f06187f3a0df2d4fc8e0ded00a7af2c26504711d91ca2b8d23010dea19247bd1d54dc31c5af9d63bccb9bdd&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">event_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_id&#39;</span><span class="p">]</span>
+		<span class="n">status</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+		<span class="n">scores</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateEventStatus</span><span class="p">(</span><span class="n">event_id</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">scores</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="createBettingMarketGroup"><a class="viewcode-back" href="../qaapi.html#qaapi.createBettingMarketGroup">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarketGroups&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">createBettingMarketGroup</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**POST** ``/bettingMarketGroups``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;description&quot;: [[&quot;en&quot;,&quot;Moneyline&quot;],[&quot;de&quot;, &quot;Moneeline&quot;]],</span>
+<span class="sd">			&quot;event_id&quot;: &quot;1.18.404&quot;,</span>
+<span class="sd">			&quot;betting_market_rule_id&quot;: &quot;1.19.0&quot;,</span>
+<span class="sd">			&quot;asset&quot;: &quot;1.3.1&quot;</span>
+<span class="sd">		}</span>
+
+
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T05:10:40&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T05:10:10&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            60,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;asset_id&quot;: &quot;1.3.1&quot;,</span>
+<span class="sd">			                                &quot;delay_before_settling&quot;: 0,</span>
+<span class="sd">			                                &quot;description&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Moneeline&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Moneyline&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;event_id&quot;: &quot;1.18.404&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;never_in_play&quot;: false,</span>
+<span class="sd">			                                &quot;rules_id&quot;: &quot;1.19.0&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 26676,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 954659182,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;2065e0341ff57d96b3ec2e4df6ed461b46dea6e0f295556302d526f2561cfd73a72b47963658fe7dbb7a2db71c4d48e53ec1e0aaa0cd2cbd3789e76b9ba007719d&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">description</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+		<span class="n">event_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_id&#39;</span><span class="p">]</span>
+		<span class="n">betting_market_rule_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_rule_id&#39;</span><span class="p">]</span>
+		<span class="n">asset</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;asset&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">createBettingMarketGroup</span><span class="p">(</span><span class="n">description</span><span class="p">,</span> <span class="n">event_id</span><span class="p">,</span> <span class="n">betting_market_rule_id</span><span class="p">,</span> <span class="n">asset</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateBettingMarketGroup"><a class="viewcode-back" href="../qaapi.html#qaapi.updateBettingMarketGroup">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarketGroups&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateBettingMarketGroup</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/bettingMarketGroups``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;description&quot;: [[&quot;en&quot;,&quot;Moneyline&quot;],[&quot;de&quot;, &quot;Monexline&quot;]],</span>
+<span class="sd">			&quot;event_id&quot;: &quot;1.18.59&quot;,</span>
+<span class="sd">			&quot;betting_market_group_id&quot;: &quot;1.20.418&quot;,</span>
+<span class="sd">			&quot;betting_market_rule_id&quot;: &quot;1.19.8&quot;,</span>
+<span class="sd">			&quot;status&quot;: &quot;upcoming&quot;</span>
+<span class="sd">		}</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T05:11:30&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T05:11:00&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            70,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;betting_market_group_id&quot;: &quot;1.20.418&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;new_description&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Monexline&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Moneyline&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;new_rules_id&quot;: &quot;1.19.8&quot;,</span>
+<span class="sd">			                                &quot;status&quot;: &quot;upcoming&quot;</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 26693,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 1054910509,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;206b94d167a14bb7972d1084061fd5a9ff882643f28bf9e4d7febc7efbdf0ff32b5811a95fe54d49e06aaaf968d5b415bed9bfde4c1f3f0d6772171420c7725795&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">bmg_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_group_id&#39;</span><span class="p">]</span>
+		<span class="n">description</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+		<span class="n">event_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;event_id&#39;</span><span class="p">]</span>
+		<span class="n">betting_market_rule_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_rule_id&#39;</span><span class="p">]</span>
+		<span class="n">status</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateBettingMarketGroup</span><span class="p">(</span><span class="n">bmg_id</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">event_id</span><span class="p">,</span> <span class="n">betting_market_rule_id</span><span class="p">,</span> <span class="n">status</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateBettingMarketGroupRule"><a class="viewcode-back" href="../qaapi.html#qaapi.updateBettingMarketGroupRule">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarketGroups/rules&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateBettingMarketGroupRule</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/bettingMarketGroups/rules``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;description&quot;: [[&quot;en&quot;,&quot;Big rule&quot;],[&quot;de&quot;, &quot;Bige Rule&quot;]],</span>
+<span class="sd">			&quot;betting_market_rule_id&quot;: &quot;1.19.8&quot;,</span>
+<span class="sd">			&quot;name&quot;: [[&quot;en&quot;, &quot;MLB_2018&quot;], [&quot;de&quot;, &quot;LMB_2018&quot;]]</span>
+<span class="sd">		}</span>
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T04:56:54&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T04:56:24&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            59,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;betting_market_rules_id&quot;: &quot;1.19.8&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;new_description&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;Bige Rule&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Big rule&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;new_name&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;LMB_2018&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;MLB_2018&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ]</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 26410,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 419842553,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;2065c3b58af4444302baed030d16e8dc0ad0146301cc39b6bc132295adf5c606b53ec950628fc91ff524344a315d9af7a29e3ce03176e1eb929a7f8e087b503a74&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">bmgr_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_rule_id&#39;</span><span class="p">]</span>
+		<span class="n">name</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+		<span class="n">description</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateBettingMarketGroupRule</span><span class="p">(</span><span class="n">bmgr_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="createBettingMarket"><a class="viewcode-back" href="../qaapi.html#qaapi.createBettingMarket">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarkets&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">createBettingMarket</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**POST** ``/bettingMarkets``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;payout_condition&quot;: [[&quot;en&quot;,&quot;Team must satisfy bmg rules&quot;],[&quot;de&quot;, &quot;German stuff&quot;]],</span>
+<span class="sd">			&quot;betting_market_group_id&quot;: &quot;1.20.417&quot;,</span>
+<span class="sd">			&quot;description&quot;: [[&quot;en&quot;, &quot;New York Yankees&quot;], [&quot;de&quot;, &quot;New Yirk Yonkees&quot;]]</span>
+<span class="sd">		}</span>
+
+
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T05:01:16&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T05:00:46&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000001,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            61,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;description&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;New Yirk Yonkees&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;New York Yankees&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;group_id&quot;: &quot;1.20.417&quot;,</span>
+<span class="sd">			                                &quot;payout_condition&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;German stuff&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Team must satisfy bmg rules&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ]</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 26494,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 750610868,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;2021226fc1fd7fdc73ce87edabf6cd41576722b968070f28b6c9282ba8dadffd3a422c383d6fa64fc2e6fe6c7582fec7773167173f1828c84a9a039d00fbedc732&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">payout_condition</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;payout_condition&#39;</span><span class="p">]</span>
+		<span class="n">description</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+		<span class="n">betting_market_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_group_id&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">createBettingMarket</span><span class="p">(</span><span class="n">payout_condition</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">betting_market_group_id</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="updateBettingMarket"><a class="viewcode-back" href="../qaapi.html#qaapi.updateBettingMarket">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarkets&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">updateBettingMarket</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/bettingMarkets``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;payout_condition&quot;: [[&quot;en&quot;,&quot;Team must satisfy bmg rules&quot;],[&quot;de&quot;, &quot;German stuff&quot;]],</span>
+<span class="sd">			&quot;betting_market_group_id&quot;: &quot;1.20.417&quot;,</span>
+<span class="sd">			&quot;description&quot;: [[&quot;en&quot;, &quot;New York Yankees&quot;], [&quot;de&quot;, &quot;New Yirk Yonkees&quot;]],</span>
+<span class="sd">			&quot;betting_market_id&quot;: &quot;1.21.883&quot;</span>
+<span class="sd">		}</span>
+
+
+
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T05:03:34&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T05:03:04&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000001,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            71,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;betting_market_id&quot;: &quot;1.21.883&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;new_description&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;New Yirk Yonkees&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;New York Yankees&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ],</span>
+<span class="sd">			                                &quot;new_group_id&quot;: &quot;1.20.417&quot;,</span>
+<span class="sd">			                                &quot;new_payout_condition&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;de&quot;,</span>
+<span class="sd">			                                        &quot;German stuff&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;en&quot;,</span>
+<span class="sd">			                                        &quot;Team must satisfy bmg rules&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ]</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 26537,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 1019350048,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;1f362fb8f03fcca714c6b060cc554d6c31d0224540cfa651211858f32f9353079c24e4b270fbbd9d8697d4c10eede81becab06cc35639358d92e5ab05a5b476219&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">betting_market_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_id&#39;</span><span class="p">]</span>
+		<span class="n">payout_condition</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;payout_condition&#39;</span><span class="p">]</span>
+		<span class="n">description</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span>
+		<span class="n">betting_market_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_group_id&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">updateBettingMarket</span><span class="p">(</span><span class="n">betting_market_id</span><span class="p">,</span> <span class="n">payout_condition</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">betting_market_group_id</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="resolveBettingMarkets"><a class="viewcode-back" href="../qaapi.html#qaapi.resolveBettingMarkets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarkets/&lt;betting_market_id&gt;/resolve&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">resolveBettingMarkets</span><span class="p">(</span><span class="n">betting_market_id</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/bettingMarkets``</span>
+
+<span class="sd">	* body:</span>
+<span class="sd">	.. code-block:: json</span>
+
+<span class="sd">		{</span>
+<span class="sd">			&quot;result_list&quot;: [[&quot;1.21.833&quot;,&quot;win&quot;],[&quot;1.21.822&quot;, &quot;not_win&quot;]],</span>
+<span class="sd">			&quot;betting_market_group_id&quot;: &quot;1.20.417&quot;</span>
+<span class="sd">		}</span>
+
+
+
+
+
+<span class="sd">	* returns:</span>
+<span class="sd">	  	+ 200:</span>
+<span class="sd">	  	.. code-block:: json</span>
+
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T05:07:07&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            22,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;expiration_time&quot;: &quot;2018-08-15T05:06:37&quot;,</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;proposed_ops&quot;: [</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;op&quot;: [</span>
+<span class="sd">			                            63,</span>
+<span class="sd">			                            {</span>
+<span class="sd">			                                &quot;betting_market_group_id&quot;: &quot;1.20.417&quot;,</span>
+<span class="sd">			                                &quot;extensions&quot;: [],</span>
+<span class="sd">			                                &quot;fee&quot;: {</span>
+<span class="sd">			                                    &quot;amount&quot;: 0,</span>
+<span class="sd">			                                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                                },</span>
+<span class="sd">			                                &quot;resolutions&quot;: [</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;1.21.822&quot;,</span>
+<span class="sd">			                                        &quot;not_win&quot;</span>
+<span class="sd">			                                    ],</span>
+<span class="sd">			                                    [</span>
+<span class="sd">			                                        &quot;1.21.833&quot;,</span>
+<span class="sd">			                                        &quot;win&quot;</span>
+<span class="sd">			                                    ]</span>
+<span class="sd">			                                ]</span>
+<span class="sd">			                            }</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 26608,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 3916725088,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;207a7bfe7b16341167b639f153b7f0c0b7bab8be8c4b3602d3b002a2fd1794903b4a0723c71c7c729782020bcab78546883a37edbb251b65aeb8cfc2f863f293f9&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+		<span class="n">result_list</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;result_list&#39;</span><span class="p">]</span>
+		<span class="n">betting_market_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_group_id&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">resolveBettingMarketGroup</span><span class="p">(</span><span class="n">betting_market_group_id</span><span class="p">,</span> <span class="n">result_list</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="getProposals"><a class="viewcode-back" href="../qaapi.html#qaapi.getProposals">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/proposals&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">getProposals</span><span class="p">():</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**GET** ``/proposals``</span>
+
+<span class="sd">	* query-params:</span>
+<span class="sd">		+ account:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: account name or id</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block: json</span>
+<span class="sd">			[</span>
+<span class="sd">			    {</span>
+<span class="sd">			        &quot;available_active_approvals&quot;: [],</span>
+<span class="sd">			        &quot;available_key_approvals&quot;: [],</span>
+<span class="sd">			        &quot;available_owner_approvals&quot;: [],</span>
+<span class="sd">			        &quot;expiration_time&quot;: &quot;2018-08-15T02:39:23&quot;,</span>
+<span class="sd">			        &quot;id&quot;: &quot;1.10.2020&quot;,</span>
+<span class="sd">			        &quot;proposed_transaction&quot;: {</span>
+<span class="sd">			            &quot;expiration&quot;: &quot;2018-08-15T02:39:23&quot;,</span>
+<span class="sd">			            &quot;extensions&quot;: [],</span>
+<span class="sd">			            &quot;operations&quot;: [</span>
+<span class="sd">			                [</span>
+<span class="sd">			                    54,</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;extensions&quot;: [],</span>
+<span class="sd">			                        &quot;fee&quot;: {</span>
+<span class="sd">			                            &quot;amount&quot;: 0,</span>
+<span class="sd">			                            &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                        },</span>
+<span class="sd">			                        &quot;name&quot;: [</span>
+<span class="sd">			                            [</span>
+<span class="sd">			                                &quot;[&quot;,</span>
+<span class="sd">			                                &quot;&#39;&quot;</span>
+<span class="sd">			                            ]</span>
+<span class="sd">			                        ],</span>
+<span class="sd">			                        &quot;sport_id&quot;: &quot;1.16.9&quot;</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            ],</span>
+<span class="sd">			            &quot;ref_block_num&quot;: 0,</span>
+<span class="sd">			            &quot;ref_block_prefix&quot;: 0</span>
+<span class="sd">			        },</span>
+<span class="sd">			        &quot;proposer&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			        &quot;required_active_approvals&quot;: [</span>
+<span class="sd">			            &quot;1.2.1&quot;</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;required_owner_approvals&quot;: []</span>
+<span class="sd">			    },</span>
+<span class="sd">			    {</span>
+<span class="sd">			        &quot;available_active_approvals&quot;: [</span>
+<span class="sd">			            &quot;1.2.7&quot;</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;available_key_approvals&quot;: [],</span>
+<span class="sd">			        &quot;available_owner_approvals&quot;: [],</span>
+<span class="sd">			        &quot;expiration_time&quot;: &quot;2018-08-14T03:42:00&quot;,</span>
+<span class="sd">			        &quot;id&quot;: &quot;1.10.2022&quot;,</span>
+<span class="sd">			        &quot;proposed_transaction&quot;: {</span>
+<span class="sd">			            &quot;expiration&quot;: &quot;2018-08-14T03:42:00&quot;,</span>
+<span class="sd">			            &quot;extensions&quot;: [],</span>
+<span class="sd">			            &quot;operations&quot;: [</span>
+<span class="sd">			                [</span>
+<span class="sd">			                    63,</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;betting_market_group_id&quot;: &quot;1.20.2109&quot;,</span>
+<span class="sd">			                        &quot;extensions&quot;: [],</span>
+<span class="sd">			                        &quot;fee&quot;: {</span>
+<span class="sd">			                            &quot;amount&quot;: 0,</span>
+<span class="sd">			                            &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                        },</span>
+<span class="sd">			                        &quot;resolutions&quot;: [</span>
+<span class="sd">			                            [</span>
+<span class="sd">			                                &quot;1.21.4374&quot;,</span>
+<span class="sd">			                                &quot;not_win&quot;</span>
+<span class="sd">			                            ],</span>
+<span class="sd">			                            [</span>
+<span class="sd">			                                &quot;1.21.4375&quot;,</span>
+<span class="sd">			                                &quot;win&quot;</span>
+<span class="sd">			                            ]</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ],</span>
+<span class="sd">			                [</span>
+<span class="sd">			                    63,</span>
+<span class="sd">			                    {</span>
+<span class="sd">			                        &quot;betting_market_group_id&quot;: &quot;1.20.2161&quot;,</span>
+<span class="sd">			                        &quot;extensions&quot;: [],</span>
+<span class="sd">			                        &quot;fee&quot;: {</span>
+<span class="sd">			                            &quot;amount&quot;: 0,</span>
+<span class="sd">			                            &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                        },</span>
+<span class="sd">			                        &quot;resolutions&quot;: [</span>
+<span class="sd">			                            [</span>
+<span class="sd">			                                &quot;1.21.4484&quot;,</span>
+<span class="sd">			                                &quot;not_win&quot;</span>
+<span class="sd">			                            ],</span>
+<span class="sd">			                            [</span>
+<span class="sd">			                                &quot;1.21.4485&quot;,</span>
+<span class="sd">			                                &quot;win&quot;</span>
+<span class="sd">			                            ]</span>
+<span class="sd">			                        ]</span>
+<span class="sd">			                    }</span>
+<span class="sd">			                ]</span>
+<span class="sd">			            ],</span>
+<span class="sd">			            &quot;ref_block_num&quot;: 0,</span>
+<span class="sd">			            &quot;ref_block_prefix&quot;: 0</span>
+<span class="sd">			        },</span>
+<span class="sd">			        &quot;proposer&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			        &quot;required_active_approvals&quot;: [</span>
+<span class="sd">			            &quot;1.2.1&quot;</span>
+<span class="sd">			        ],</span>
+<span class="sd">			        &quot;required_owner_approvals&quot;: []</span>
+<span class="sd">			    }</span>
+<span class="sd">			]</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">account</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">getProposals</span><span class="p">(</span><span class="n">account</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="approveProposal"><a class="viewcode-back" href="../qaapi.html#qaapi.approveProposal">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/proposals/&lt;proposal_id&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">approveProposal</span><span class="p">(</span><span class="n">proposal_id</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	**PUT** ``/proposals/&lt;proposal_id&gt;``</span>
+
+<span class="sd">	* path-params:</span>
+<span class="sd">		+ proposal_id:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: proposal id</span>
+
+<span class="sd">	* query-params:</span>
+<span class="sd">		+ approve:</span>
+<span class="sd">			- type: Boolean</span>
+<span class="sd">			- description: approve or disapprove proposal</span>
+<span class="sd">		+ account:</span>
+<span class="sd">			- type: string</span>
+<span class="sd">			- description: account name or id</span>
+
+<span class="sd">	* returns:</span>
+<span class="sd">		+ 200:</span>
+<span class="sd">		.. code-block: json</span>
+<span class="sd">			{</span>
+<span class="sd">			    &quot;expiration&quot;: &quot;2018-08-14T03:02:53&quot;,</span>
+<span class="sd">			    &quot;extensions&quot;: [],</span>
+<span class="sd">			    &quot;operations&quot;: [</span>
+<span class="sd">			        [</span>
+<span class="sd">			            23,</span>
+<span class="sd">			            {</span>
+<span class="sd">			                &quot;active_approvals_to_add&quot;: [],</span>
+<span class="sd">			                &quot;active_approvals_to_remove&quot;: [</span>
+<span class="sd">			                    &quot;1.2.7&quot;</span>
+<span class="sd">			                ],</span>
+<span class="sd">			                &quot;extensions&quot;: [],</span>
+<span class="sd">			                &quot;fee&quot;: {</span>
+<span class="sd">			                    &quot;amount&quot;: 2000000,</span>
+<span class="sd">			                    &quot;asset_id&quot;: &quot;1.3.0&quot;</span>
+<span class="sd">			                },</span>
+<span class="sd">			                &quot;fee_paying_account&quot;: &quot;1.2.7&quot;,</span>
+<span class="sd">			                &quot;key_approvals_to_add&quot;: [],</span>
+<span class="sd">			                &quot;key_approvals_to_remove&quot;: [],</span>
+<span class="sd">			                &quot;owner_approvals_to_add&quot;: [],</span>
+<span class="sd">			                &quot;owner_approvals_to_remove&quot;: [],</span>
+<span class="sd">			                &quot;proposal&quot;: &quot;1.10.2020&quot;</span>
+<span class="sd">			            }</span>
+<span class="sd">			        ]</span>
+<span class="sd">			    ],</span>
+<span class="sd">			    &quot;ref_block_num&quot;: 24195,</span>
+<span class="sd">			    &quot;ref_block_prefix&quot;: 1095264235,</span>
+<span class="sd">			    &quot;signatures&quot;: [</span>
+<span class="sd">			        &quot;1f62b9e802ebbe616d4fabbf43f2f54a1ee772eda52c924cd41d2b15e87d82cae922304b54f7662d628cf47852119082202592f4810468d9938cd80b1c7eca02a6&quot;</span>
+<span class="sd">			    ]</span>
+<span class="sd">			}</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="k">try</span><span class="p">:</span>
+		<span class="n">approve</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;approve&quot;</span><span class="p">)</span>
+		<span class="n">account</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;account&quot;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">approve</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="s2">&quot;Specify approve in query params&quot;</span><span class="p">),</span> <span class="mi">500</span><span class="p">)</span>
+		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">approveProposal</span><span class="p">(</span><span class="n">proposal_id</span><span class="p">,</span> <span class="n">approve</span><span class="p">))</span>
+	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
 
 <span class="c1"># Other Calls</span>
 

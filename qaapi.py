@@ -2034,7 +2034,7 @@ def getProposals():
 @app.route("/proposals/<proposal_id>", methods=['PUT'])
 def approveProposal(proposal_id):
 	"""
-	**PUT** ``/proposals/<proposal_id>
+	**PUT** ``/proposals/<proposal_id>``
 
 	* path-params:
 		+ proposal_id:
