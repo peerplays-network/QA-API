@@ -34,8 +34,65 @@
   <div class="section" id="module-qaapi">
 <span id="qaapi-module"></span><h1>qaapi module<a class="headerlink" href="#module-qaapi" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="qaapi.cancelBet">
-<code class="descclassname">qaapi.</code><code class="descname">cancelBet</code><span class="sig-paren">(</span><em>bet_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBet" title="Permalink to this definition">¶</a></dt>
+<dt id="qaapi.approveProposal">
+<code class="descclassname">qaapi.</code><code class="descname">approveProposal</code><span class="sig-paren">(</span><em>proposal_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#approveProposal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.approveProposal" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/proposals/&lt;proposal_id&gt;</span></code></p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>path-params:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>proposal_id:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: proposal id</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>query-params:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>approve:</dt>
+<dd><ul class="first last">
+<li>type: Boolean</li>
+<li>description: approve or disapprove proposal</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>account:</dt>
+<dd><ul class="first last">
+<li>type: string</li>
+<li>description: account name or id</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first last">
+<li>200:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.cancelBets">
+<code class="descclassname">qaapi.</code><code class="descname">cancelBets</code><span class="sig-paren">(</span><em>bet_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBets" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>DELETE</strong> <code class="docutils literal notranslate"><span class="pre">/bets/&lt;bet_id&gt;</span></code></p>
 <ul>
 <li><dl class="first docutils">
@@ -108,34 +165,16 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="qaapi.cancelBets">
-<code class="descclassname">qaapi.</code><code class="descname">cancelBets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#cancelBets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.cancelBets" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>DELETE</strong> <code class="docutils literal notranslate"><span class="pre">/bets</span></code></p>
+<dt id="qaapi.createBettingMarket">
+<code class="descclassname">qaapi.</code><code class="descname">createBettingMarket</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#createBettingMarket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.createBettingMarket" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarkets</span></code></p>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt>query-params:</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>account:</dt>
-<dd><ul class="first last">
-<li>type: string</li>
-<li>description: account name or account id</li>
-<li>required: True</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
 <li>body:</li>
 </ul>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-        <span class="nt">&quot;ids&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;1.22.1166&quot;</span><span class="p">,</span> 
-                <span class="s2">&quot;1.22.1167&quot;</span>
-        <span class="p">]</span>
+        <span class="nt">&quot;payout_condition&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="s2">&quot;Team must satisfy bmg rules&quot;</span><span class="p">],[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;German stuff&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.417&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;New York Yankees&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;New Yirk Yonkees&quot;</span><span class="p">]]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -145,54 +184,331 @@
 <dd><ul class="first simple">
 <li>200:</li>
 </ul>
-<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-26T05:11:48&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">[</span>
-                <span class="mi">68</span><span class="p">,</span>
-                <span class="p">{</span>
-                    <span class="nt">&quot;bet_to_cancel&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.1166&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-                    <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T05:01:16&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T05:00:46&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000001</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">61</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;New Yirk Yonkees&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;New York Yankees&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.417&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;payout_condition&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;German stuff&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Team must satisfy bmg rules&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">]</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
                     <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">]</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">20203</span><span class="p">,</span>
-        <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1203983718</span><span class="p">,</span>
-        <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;1f616b8f816ba2abb31ba17d57a02be50a86b58ebc6e44ebe9b0d1ce881c3c54db09a9fa18142ef6ff5faacddf6b2767b59390acb9907dd366ca67788d96d91881&quot;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
         <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-26T05:11:49&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">[</span>
-                <span class="mi">68</span><span class="p">,</span>
-                <span class="p">{</span>
-                    <span class="nt">&quot;bet_to_cancel&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.1167&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
-                    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-                    <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
-                        <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                        <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">26494</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">750610868</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;2021226fc1fd7fdc73ce87edabf6cd41576722b968070f28b6c9282ba8dadffd3a422c383d6fa64fc2e6fe6c7582fec7773167173f1828c84a9a039d00fbedc732&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.createBettingMarketGroup">
+<code class="descclassname">qaapi.</code><code class="descname">createBettingMarketGroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#createBettingMarketGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.createBettingMarketGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarketGroups</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="s2">&quot;Moneyline&quot;</span><span class="p">],[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Moneeline&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.404&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_rule_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.0&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;asset&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T05:10:40&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T05:10:10&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">60</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.1&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;delay_before_settling&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Moneeline&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Moneyline&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.404&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;never_in_play&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                                <span class="nt">&quot;rules_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.0&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
                     <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">]</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">20203</span><span class="p">,</span>
-        <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1203983718</span><span class="p">,</span>
-        <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;20420e197512d5bcfc30f65c11629212b0363959a9f5692fbfc85180343c56d489389224e64cfffebf430cc6a7058a8d79ce1a1aab0ec4a23ef28289d86f3e232d&quot;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
         <span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">26676</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">954659182</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;2065e0341ff57d96b3ec2e4df6ed461b46dea6e0f295556302d526f2561cfd73a72b47963658fe7dbb7a2db71c4d48e53ec1e0aaa0cd2cbd3789e76b9ba007719d&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.createEvent">
+<code class="descclassname">qaapi.</code><code class="descname">createEvent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#createEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.createEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/events</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Event&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Evante&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;season&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;2018&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;2018&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-17T21:08:47&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.17&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T04:15:41&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T04:15:11&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">56</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.17&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Evante&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Event&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;season&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;2018&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;2018&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-17T21:08:47&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">25609</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">2528423905</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;201227d4498aaac9e27fb43c2df83f455aee4f4c774f178574d4907874f6d3222b4eefe7a6aae14c2e7aa683223e6b6ad3a7d0b634d304820c40f94df4a50df509&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.createEventGroup">
+<code class="descclassname">qaapi.</code><code class="descname">createEventGroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#createEventGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.createEventGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/eventGroups</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Group&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Group&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.9&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first last">
+<li>200:</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.createSport">
+<code class="descclassname">qaapi.</code><code class="descname">createSport</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#createSport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.createSport" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>POST</strong> <code class="docutils literal notranslate"><span class="pre">/sports</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Sport&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Spoort&quot;</span><span class="p">]]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T03:25:59&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T03:25:29&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">52</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Spoort&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Sport&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">]</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">24645</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">3184223600</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;1f57acd0862ad0ecfa7d6ca5f7857a803af725b92e325af9aab5e0ea118fa0174d2f9a61646d914f6543d530446d798af12675e04ab81c0db8ea351eda0b80ee96&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </dd>
@@ -1065,15 +1381,15 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="qaapi.getResolutions">
-<code class="descclassname">qaapi.</code><code class="descname">getResolutions</code><span class="sig-paren">(</span><em>bettor_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getResolutions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getResolutions" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/bettors/&lt;bettor_id&gt;/resolutions</span></code></p>
-<ul>
+<dt id="qaapi.getProposals">
+<code class="descclassname">qaapi.</code><code class="descname">getProposals</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#getProposals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.getProposals" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GET</strong> <code class="docutils literal notranslate"><span class="pre">/proposals</span></code></p>
+<ul class="simple">
 <li><dl class="first docutils">
-<dt>path-params:</dt>
-<dd><ul class="first last simple">
+<dt>query-params:</dt>
+<dd><ul class="first last">
 <li><dl class="first docutils">
-<dt>bettor_id:</dt>
+<dt>account:</dt>
 <dd><ul class="first last">
 <li>type: string</li>
 <li>description: account name or id</li>
@@ -1086,65 +1402,10 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>query-params:</dt>
-<dd><ul class="first last simple">
-<li><dl class="first docutils">
-<dt>bettingMarketGroup:</dt>
-<dd><ul class="first last">
-<li>type: string</li>
-<li>description: betting market group id</li>
-<li>required: False</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
 <dt>returns:</dt>
-<dd><ul class="first simple">
+<dd><ul class="first last">
 <li>200:</li>
 </ul>
-<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&quot;block_num&quot;</span><span class="p">:</span> <span class="mi">1046928</span><span class="p">,</span>
-        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.11.13588&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="mi">64</span><span class="p">,</span>
-            <span class="p">{</span>
-                <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.1500&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
-                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
-                <span class="p">},</span>
-                <span class="nt">&quot;fees_paid&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="nt">&quot;resolutions&quot;</span><span class="p">:</span> <span class="p">[</span>
-                    <span class="p">[</span>
-                        <span class="s2">&quot;1.21.3130&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;win&quot;</span>
-                    <span class="p">],</span>
-                    <span class="p">[</span>
-                        <span class="s2">&quot;1.21.3131&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;not_win&quot;</span>
-                    <span class="p">]</span>
-                <span class="p">],</span>
-                <span class="nt">&quot;winnings&quot;</span><span class="p">:</span> <span class="mi">1495318</span>
-            <span class="p">}</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;op_in_trx&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="nt">&quot;result&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="mi">0</span><span class="p">,</span>
-            <span class="p">{}</span>
-        <span class="p">],</span>
-        <span class="nt">&quot;trx_in_block&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="nt">&quot;virtual_op&quot;</span><span class="p">:</span> <span class="mi">33813</span>
-    <span class="p">}</span>
-<span class="p">]</span>
-</pre></div>
-</div>
 </dd>
 </dl>
 </li>
@@ -1498,6 +1759,647 @@
     <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.3295&quot;</span><span class="p">,</span>
     <span class="nt">&quot;bettor_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.104&quot;</span><span class="p">,</span>
     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.22.1074&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.resolveBettingMarkets">
+<code class="descclassname">qaapi.</code><code class="descname">resolveBettingMarkets</code><span class="sig-paren">(</span><em>betting_market_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#resolveBettingMarkets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.resolveBettingMarkets" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarkets</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;result_list&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;1.21.833&quot;</span><span class="p">,</span><span class="s2">&quot;win&quot;</span><span class="p">],[</span><span class="s2">&quot;1.21.822&quot;</span><span class="p">,</span> <span class="s2">&quot;not_win&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.417&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T05:07:07&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T05:06:37&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">63</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.417&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;resolutions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;1.21.822&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;not_win&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;1.21.833&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;win&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">]</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">26608</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">3916725088</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;207a7bfe7b16341167b639f153b7f0c0b7bab8be8c4b3602d3b002a2fd1794903b4a0723c71c7c729782020bcab78546883a37edbb251b65aeb8cfc2f863f293f9&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateBettingMarket">
+<code class="descclassname">qaapi.</code><code class="descname">updateBettingMarket</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateBettingMarket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateBettingMarket" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarkets</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;payout_condition&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="s2">&quot;Team must satisfy bmg rules&quot;</span><span class="p">],[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;German stuff&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.417&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;New York Yankees&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;New Yirk Yonkees&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.883&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T05:03:34&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T05:03:04&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000001</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">71</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;betting_market_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.21.883&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;new_description&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;New Yirk Yonkees&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;New York Yankees&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;new_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.417&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;new_payout_condition&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;German stuff&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Team must satisfy bmg rules&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">]</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">26537</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1019350048</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;1f362fb8f03fcca714c6b060cc554d6c31d0224540cfa651211858f32f9353079c24e4b270fbbd9d8697d4c10eede81becab06cc35639358d92e5ab05a5b476219&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateBettingMarketGroup">
+<code class="descclassname">qaapi.</code><code class="descname">updateBettingMarketGroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateBettingMarketGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateBettingMarketGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarketGroups</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="s2">&quot;Moneyline&quot;</span><span class="p">],[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Monexline&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.59&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.418&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;betting_market_rule_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.8&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;upcoming&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T05:11:30&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T05:11:00&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">70</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;betting_market_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.20.418&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;new_description&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Monexline&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Moneyline&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;new_rules_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.8&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;upcoming&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">26693</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1054910509</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;206b94d167a14bb7972d1084061fd5a9ff882643f28bf9e4d7febc7efbdf0ff32b5811a95fe54d49e06aaaf968d5b415bed9bfde4c1f3f0d6772171420c7725795&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateBettingMarketGroupRule">
+<code class="descclassname">qaapi.</code><code class="descname">updateBettingMarketGroupRule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateBettingMarketGroupRule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateBettingMarketGroupRule" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/bettingMarketGroups/rules</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span><span class="s2">&quot;Big rule&quot;</span><span class="p">],[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Bige Rule&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;betting_market_rule_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.8&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;MLB_2018&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;LMB_2018&quot;</span><span class="p">]]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T04:56:54&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T04:56:24&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">59</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;betting_market_rules_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.19.8&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;new_description&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Bige Rule&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Big rule&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;new_name&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;LMB_2018&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;MLB_2018&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">]</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">26410</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">419842553</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;2065c3b58af4444302baed030d16e8dc0ad0146301cc39b6bc132295adf5c606b53ec950628fc91ff524344a315d9af7a29e3ce03176e1eb929a7f8e087b503a74&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateEvent">
+<code class="descclassname">qaapi.</code><code class="descname">updateEvent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/events</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Event&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Evante&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;season&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;2018&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;2018&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-18T21:08:47&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.13&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.59&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;frozen&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T04:30:25&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T04:29:55&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">57</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.59&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;new_event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.13&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;new_name&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Evante&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Event&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;new_season&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;2018&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;2018&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;new_start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-18T21:08:47&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;new_status&quot;</span><span class="p">:</span> <span class="s2">&quot;frozen&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">25895</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">2859863074</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;207d9e5a8ff3f9d79eded681f3737779de689560283020fb06ee22a6cd263bd06f4cc1aa47adc5361c413f2872fcd6d0aa982b7b3eeba1ddc601f0c594acd2a405&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateEventGroup">
+<code class="descclassname">qaapi.</code><code class="descname">updateEventGroup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateEventGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateEventGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/eventGroups</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Group&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Group&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.4&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.17&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T03:55:25&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T03:54:54&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">55</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;event_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.17.17&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;new_name&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Groupe&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Group&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;new_sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.4&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">25216</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">920330615</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;2059282a31f9670b250e2e3fa26782758992c92ea835a5c6d2c904836c791a2e5052ec6f1d2166f6bdefb97bfee6a7f438db8dc0caaec1e403bf263ccaabd934a6&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateEventStatus">
+<code class="descclassname">qaapi.</code><code class="descname">updateEventStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateEventStatus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateEventStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/events/status</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;1-0&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;1-0&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.59&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;frozen&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T04:28:32&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T04:28:02&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">72</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.59&quot;</span><span class="p">,</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;frozen&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">25857</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">1565774390</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;1f5fff23560217af19025c4092ee74175608adb8991f06187f3a0df2d4fc8e0ded00a7af2c26504711d91ca2b8d23010dea19247bd1d54dc31c5af9d63bccb9bdd&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="qaapi.updateSport">
+<code class="descclassname">qaapi.</code><code class="descname">updateSport</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/qaapi.html#updateSport"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#qaapi.updateSport" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>PUT</strong> <code class="docutils literal notranslate"><span class="pre">/sports</span></code></p>
+<ul class="simple">
+<li>body:</li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;en&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Sport&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;Michael Sporte&quot;</span><span class="p">]],</span>
+        <span class="nt">&quot;sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.9&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt>returns:</dt>
+<dd><ul class="first simple">
+<li>200:</li>
+</ul>
+<div class="last highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;expiration&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-14T03:50:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="nt">&quot;operations&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">[</span>
+            <span class="mi">22</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="nt">&quot;expiration_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-08-15T03:49:30&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span>
+                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                <span class="p">},</span>
+                <span class="nt">&quot;fee_paying_account&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.7&quot;</span><span class="p">,</span>
+                <span class="nt">&quot;proposed_ops&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">&quot;op&quot;</span><span class="p">:</span> <span class="p">[</span>
+                            <span class="mi">53</span><span class="p">,</span>
+                            <span class="p">{</span>
+                                <span class="nt">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                                <span class="nt">&quot;fee&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                    <span class="nt">&quot;amount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="nt">&quot;asset_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span>
+                                <span class="p">},</span>
+                                <span class="nt">&quot;new_name&quot;</span><span class="p">:</span> <span class="p">[</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;de&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Sporte&quot;</span>
+                                    <span class="p">],</span>
+                                    <span class="p">[</span>
+                                        <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;Michael Sport&quot;</span>
+                                    <span class="p">]</span>
+                                <span class="p">],</span>
+                                <span class="nt">&quot;sport_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.16.9&quot;</span>
+                            <span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="nt">&quot;ref_block_num&quot;</span><span class="p">:</span> <span class="mi">25111</span><span class="p">,</span>
+    <span class="nt">&quot;ref_block_prefix&quot;</span><span class="p">:</span> <span class="mi">2306565201</span><span class="p">,</span>
+    <span class="nt">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;202260fd3551a76d9ceba1ed9c5a6aab080365de67b5282bf9e74ea461875ae2e362f91d2441f4c7000862ceb8005169bcf2605f0b63893721ee7f7a7dadf6b013&quot;</span>
+    <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
 </div>
