@@ -1917,17 +1917,16 @@ def updateBettingMarket():
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)
 
-@app.route("/bettingMarkets/<betting_market_id>/resolve", methods=['PUT'])
-def resolveBettingMarkets(betting_market_id):
+@app.route("/bettingMarketGroups/<betting_market_group_id>/resolve", methods=['PUT'])
+def resolveBettingMarketGroup(betting_market_group_id):
 	"""
-	**PUT** ``/bettingMarkets``
+	**PUT** ``/bettingMarketGroups/<betting_market_group_id>/resolve``
 
 	* body:
 	.. code-block:: json
 
 		{
 			"result_list": [["1.21.833","win"],["1.21.822", "not_win"]],
-			"betting_market_group_id": "1.20.417"
 		}
 
 
@@ -1990,7 +1989,6 @@ def resolveBettingMarkets(betting_market_id):
 	try:
 		body = request.get_json()
 		result_list = body['result_list']
-		betting_market_group_id = body['betting_market_group_id']
 		return jsonify(mint.resolveBettingMarketGroup(betting_market_group_id, result_list))
 	except Exception as e:
 		return make_response(jsonify(error=str(e)), 500)

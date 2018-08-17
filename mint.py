@@ -30,7 +30,7 @@ def updateEvent(eventId, name, season, startTime, eventGroupId, status):
 	return Node().broadcastPendingTransaction()
 
 def updateEventStatus(eventId, status, scores=[]):
-	Node().updateEventStatus(eventId, status, scores=[])
+	Node().updateEventStatus(eventId, status, scores)
 	return Node().broadcastPendingTransaction()
 
 def createBettingMarketGroup(description, eventId, bettingMarketRuleId, asset):

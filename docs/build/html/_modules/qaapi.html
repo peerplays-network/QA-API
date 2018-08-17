@@ -1951,17 +1951,16 @@
 	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="resolveBettingMarkets"><a class="viewcode-back" href="../qaapi.html#qaapi.resolveBettingMarkets">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarkets/&lt;betting_market_id&gt;/resolve&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">resolveBettingMarkets</span><span class="p">(</span><span class="n">betting_market_id</span><span class="p">):</span>
+<div class="viewcode-block" id="resolveBettingMarketGroup"><a class="viewcode-back" href="../qaapi.html#qaapi.resolveBettingMarketGroup">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/bettingMarketGroups/&lt;betting_market_group_id&gt;/resolve&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;PUT&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">resolveBettingMarketGroup</span><span class="p">(</span><span class="n">betting_market_group_id</span><span class="p">):</span>
 	<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">	**PUT** ``/bettingMarkets``</span>
+<span class="sd">	**PUT** ``/bettingMarketGroups/&lt;betting_market_group_id&gt;/resolve``</span>
 
 <span class="sd">	* body:</span>
 <span class="sd">	.. code-block:: json</span>
 
 <span class="sd">		{</span>
 <span class="sd">			&quot;result_list&quot;: [[&quot;1.21.833&quot;,&quot;win&quot;],[&quot;1.21.822&quot;, &quot;not_win&quot;]],</span>
-<span class="sd">			&quot;betting_market_group_id&quot;: &quot;1.20.417&quot;</span>
 <span class="sd">		}</span>
 
 
@@ -2024,7 +2023,6 @@
 	<span class="k">try</span><span class="p">:</span>
 		<span class="n">body</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
 		<span class="n">result_list</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;result_list&#39;</span><span class="p">]</span>
-		<span class="n">betting_market_group_id</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;betting_market_group_id&#39;</span><span class="p">]</span>
 		<span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">mint</span><span class="o">.</span><span class="n">resolveBettingMarketGroup</span><span class="p">(</span><span class="n">betting_market_group_id</span><span class="p">,</span> <span class="n">result_list</span><span class="p">))</span>
 	<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 		<span class="k">return</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">error</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="mi">500</span><span class="p">)</span></div>
