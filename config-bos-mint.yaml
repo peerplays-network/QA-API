@@ -11,7 +11,7 @@ connection:
 
     elizabeth:
         node:
-            - ws://ec2-35-182-42-231.ca-central-1.compute.amazonaws.com:8090
+            - ws://ec2-35-183-70-167.ca-central-1.compute.amazonaws.com:8090
         account: init0
         keys:
             - 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
